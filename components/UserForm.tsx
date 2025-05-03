@@ -3,6 +3,7 @@
 import { createUser } from '@/app/actions'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import TextButton from './TextButton'
 
 type Props = {}
 
@@ -37,9 +38,11 @@ function UserForm(props: Props) {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <button onClick={() => createNewUser()} disabled={loading}>
-          {loading ? '...' : 'submit'}
-        </button>
+        <TextButton
+          buttonText="Submit"
+          onClick={() => createNewUser()}
+          isLoading={loading}
+        />
       </div>
     </>
   )

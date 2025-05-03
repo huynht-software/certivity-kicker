@@ -24,6 +24,7 @@ export type SimpleSelectProps<T> = {
   onSelection: (selection: T) => void
   currentSelection: T | undefined
   icon?: React.ReactNode
+  searchable?: boolean
   placeholder?: string
   disabled?: boolean
   required?: boolean
@@ -120,9 +121,7 @@ export function DropdownInput<T>(props: SimpleSelectProps<T>) {
         }}
       >
         <Command>
-          {props.options.length > 10 && (
-            <CommandInput placeholder="Search..." />
-          )}
+          {props.searchable && <CommandInput placeholder="Search..." />}
           <CommandEmpty>No entries found.</CommandEmpty>
           <CommandList>
             <CommandGroup>
