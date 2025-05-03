@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String  @id @default(auto()) @map("_id") @db.ObjectId
+  name                 String
+  forwardRating        Float   @default(1000.0)
+  defensiveRating      Float   @default(1000.0)
+  singlesRating        Float   @default(1000.0)
+  wonSingles           Match[] @relation("SinglesWinner")
+  lostSingles          Match[] @relation("SinglesLoser")
+  wonDoublesForward    Match[] @relation("DoublesWinnerForward")
+  wonDoublesDefensive  Match[] @relation("DoublesWinnerDefensive")
+  lostDoublesForward   Match[] @relation("DoublesLoserForward")
+  lostDoublesDefensive Match[] @relation("DoublesLoserDefensive")
+
+  @@unique([name])
+}
+
+model Match {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  isDoubles Boolean
+  createdAt DateTime @default(now())
+
+  // Singles Match
+  winnerId String? @db.ObjectId
+  winner   User?   @relation("SinglesWinner", fields: [winnerId], references: [id])
+  loserId  String? @db.ObjectId
+  loser    User?   @relation("SinglesLoser", fields: [loserId], references: [id])
+
+  // Doubles Match
+  winnerForwardId   String? @db.ObjectId
+  winnerForward     User?   @relation("DoublesWinnerForward", fields: [winnerForwardId], references: [id])
+  winnerDefensiveId String? @db.ObjectId
+  winnerDefensive   User?   @relation("DoublesWinnerDefensive", fields: [winnerDefensiveId], references: [id])
+  loserForwardId    String? @db.ObjectId
+  loserForward      User?   @relation("DoublesLoserForward", fields: [loserForwardId], references: [id])
+  loserDefensiveId  String? @db.ObjectId
+  loserDefensive    User?   @relation("DoublesLoserDefensive", fields: [loserDefensiveId], references: [id])
+
+  @@index([winnerId])
+  @@index([loserId])
+  @@index([winnerForwardId])
+  @@index([winnerDefensiveId])
+  @@index([loserForwardId])
+  @@index([loserDefensiveId])
+}
