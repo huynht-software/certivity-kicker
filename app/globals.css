@@ -1,12 +1,20 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+body {
+  @apply text-gray-800;
+}
+
 .default-button {
   @apply cursor-pointer hover:bg-gray-200 rounded-md bg-white border border-gray-800 w-fit px-4 py-1;
 }
 
 .negative-button {
   @apply cursor-pointer hover:bg-gray-200 rounded-md bg-white border border-red-500 text-red-500 w-fit px-4 py-1;
+}
+
+.text-input {
+  @apply border rounded-md border-gray-800 p-1 bg-white placeholder-gray-400 text-gray-800;
 }
 
 @custom-variant dark (&:is(.dark *));

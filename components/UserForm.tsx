@@ -43,14 +43,14 @@ function UserForm(props: Props) {
           Name
           <input
             type="text"
-            className="border rounded-md border-gray-800"
+            className="text-input"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           Password
           <input
             type="text"
-            className="border rounded-md border-gray-800"
+            className="text-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
