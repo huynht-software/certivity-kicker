@@ -16,7 +16,7 @@ function UserForm(props: Props) {
   const [loading, setLoading] = useState(false)
 
   async function createNewUser() {
-    if (password !== 'certivity123') {
+    if (process.env.NODE_ENV !== 'development' && password !== 'certivity123') {
       toast('wrong password')
       return
     }
