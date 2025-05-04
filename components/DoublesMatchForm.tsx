@@ -49,14 +49,6 @@ function DoublesMatchForm(props: Props) {
 
     setLoading(true)
 
-    setWinnerD(undefined)
-    setWinnerF(undefined)
-
-    setLoserD(undefined)
-    setLoserF(undefined)
-
-    router.refresh()
-
     try {
       await postDoublesMatch({
         winner: {
@@ -68,6 +60,14 @@ function DoublesMatchForm(props: Props) {
           defensiveId: loserD!.id,
         },
       })
+
+      setWinnerD(undefined)
+      setWinnerF(undefined)
+
+      setLoserD(undefined)
+      setLoserF(undefined)
+
+      router.refresh()
     } catch (e) {
       console.error(e)
     } finally {
@@ -77,9 +77,9 @@ function DoublesMatchForm(props: Props) {
 
   return (
     <>
-      <div className="flex flex-col">
-        <div className="flex items-center gap-2 justify-between">
-          <div className="flex flex-col w-full">
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center gap-6 justify-between">
+          <div className="flex flex-col w-full gap-2">
             Winner:
             <DropdownInput
               options={props.allUsers}
@@ -98,8 +98,8 @@ function DoublesMatchForm(props: Props) {
               searchable
             />
           </div>
-          vs.
-          <div className="flex flex-col w-full">
+          <div className="mt-4">vs.</div>
+          <div className="flex flex-col w-full gap-2">
             Loser:
             <DropdownInput
               options={props.allUsers}

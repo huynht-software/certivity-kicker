@@ -1,3 +1,4 @@
+import Navbar from '@/components/Navbar'
 import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
 import './globals.css'
@@ -15,7 +16,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <Navbar />
+        <div className="absolute w-screen top-[60px]">{children}</div>
         <Toaster />
       </body>
     </html>

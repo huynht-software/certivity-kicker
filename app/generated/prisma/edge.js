@@ -159,12 +159,11 @@ const config = {
     "db"
   ],
   "activeProvider": "mongodb",
-  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "mongodb+srv://user:Blutwurst1@cluster0.wnertlp.mongodb.net/certivity-kicker?retryWrites=true&w=majority&appName=Cluster0"
       }
     }
   },

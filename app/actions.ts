@@ -3,7 +3,7 @@ import prisma from '@/lib/prisma'
 
 // USERS
 // read
-export async function getUsers() {
+export async function getAllUsers() {
   try {
     const users = await prisma.user.findMany({
       include: {
@@ -13,8 +13,6 @@ export async function getUsers() {
         name: 'desc',
       },
     })
-
-    console.log(users)
 
     return users
   } catch (error) {
@@ -45,7 +43,7 @@ export async function createUser({ name }: { name: string }) {
 
 // MATCHES
 // read all matches
-export async function getMatches() {
+export async function getMatches(input?: { limit?: number }) {
   try {
     const matches = await prisma.match.findMany({
       include: {
@@ -63,6 +61,7 @@ export async function getMatches() {
       orderBy: {
         createdAt: 'desc',
       },
+      take: input?.limit,
     })
 
     return matches

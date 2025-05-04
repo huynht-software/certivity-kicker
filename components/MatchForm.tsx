@@ -16,18 +16,24 @@ function MatchForm(props: Props) {
 
   return (
     <>
-      <Tabs defaultValue="doubles" className="w-[400px]">
-        <TabsList>
-          <TabsTrigger value="doubles">Doubles</TabsTrigger>
-          <TabsTrigger value="singles">Singles</TabsTrigger>
-        </TabsList>
-        <TabsContent value="doubles">
-          <DoublesMatchForm allUsers={props.allUsers} />
-        </TabsContent>
-        <TabsContent value="singles">
-          <SinglesMatchForm allUsers={props.allUsers} />
-        </TabsContent>
-      </Tabs>
+      <div className="w-full flex justify-center">
+        <Tabs defaultValue="doubles" className="w-full">
+          <TabsList className="w-full">
+            <TabsTrigger value="doubles" className="cursor-pointer">
+              Doubles
+            </TabsTrigger>
+            <TabsTrigger value="singles" className="cursor-pointer">
+              Singles
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="doubles">
+            <DoublesMatchForm allUsers={props.allUsers} />
+          </TabsContent>
+          <TabsContent value="singles">
+            <SinglesMatchForm allUsers={props.allUsers} />
+          </TabsContent>
+        </Tabs>
+      </div>
     </>
   )
 }

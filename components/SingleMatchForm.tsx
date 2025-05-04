@@ -31,13 +31,17 @@ function SinglesMatchForm(props: Props) {
     }
 
     setLoading(true)
-    router.refresh()
 
     try {
       await postSinglesMatch({
         winnerId: winner.id,
         loserId: loser.id,
       })
+
+      setWinner(undefined)
+      setLoser(undefined)
+
+      router.refresh()
     } catch (e) {
       console.error(e)
     } finally {
@@ -47,9 +51,9 @@ function SinglesMatchForm(props: Props) {
 
   return (
     <>
-      <div className="flex flex-col">
-        <div className="flex items-center gap-2 justify-between">
-          <div className="flex flex-col w-full">
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center gap-6 justify-between">
+          <div className="flex flex-col w-full gap-2">
             Winner:
             <DropdownInput
               options={props.allUsers}
@@ -60,8 +64,8 @@ function SinglesMatchForm(props: Props) {
               searchable
             />
           </div>
-          vs.
-          <div className="flex flex-col w-full">
+          <div className="mt-8">vs.</div>
+          <div className="flex flex-col w-full gap-2">
             Loser:
             <DropdownInput
               options={props.allUsers}
