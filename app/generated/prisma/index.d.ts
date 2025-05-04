@@ -1641,9 +1641,9 @@ export namespace Prisma {
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
-    readonly forwardRating: FieldRef<"User", 'Float'>
-    readonly defensiveRating: FieldRef<"User", 'Float'>
-    readonly singlesRating: FieldRef<"User", 'Float'>
+    readonly forwardRating: FieldRef<"User", 'Int'>
+    readonly defensiveRating: FieldRef<"User", 'Int'>
+    readonly singlesRating: FieldRef<"User", 'Int'>
   }
     
 
@@ -2182,14 +2182,25 @@ export namespace Prisma {
 
   export type AggregateMatch = {
     _count: MatchCountAggregateOutputType | null
+    _avg: MatchAvgAggregateOutputType | null
+    _sum: MatchSumAggregateOutputType | null
     _min: MatchMinAggregateOutputType | null
     _max: MatchMaxAggregateOutputType | null
+  }
+
+  export type MatchAvgAggregateOutputType = {
+    ratingChange: number | null
+  }
+
+  export type MatchSumAggregateOutputType = {
+    ratingChange: number | null
   }
 
   export type MatchMinAggregateOutputType = {
     id: string | null
     isDoubles: boolean | null
     createdAt: Date | null
+    ratingChange: number | null
     winnerId: string | null
     loserId: string | null
     winnerForwardId: string | null
@@ -2202,6 +2213,7 @@ export namespace Prisma {
     id: string | null
     isDoubles: boolean | null
     createdAt: Date | null
+    ratingChange: number | null
     winnerId: string | null
     loserId: string | null
     winnerForwardId: string | null
@@ -2214,6 +2226,7 @@ export namespace Prisma {
     id: number
     isDoubles: number
     createdAt: number
+    ratingChange: number
     winnerId: number
     loserId: number
     winnerForwardId: number
@@ -2224,10 +2237,19 @@ export namespace Prisma {
   }
 
 
+  export type MatchAvgAggregateInputType = {
+    ratingChange?: true
+  }
+
+  export type MatchSumAggregateInputType = {
+    ratingChange?: true
+  }
+
   export type MatchMinAggregateInputType = {
     id?: true
     isDoubles?: true
     createdAt?: true
+    ratingChange?: true
     winnerId?: true
     loserId?: true
     winnerForwardId?: true
@@ -2240,6 +2262,7 @@ export namespace Prisma {
     id?: true
     isDoubles?: true
     createdAt?: true
+    ratingChange?: true
     winnerId?: true
     loserId?: true
     winnerForwardId?: true
@@ -2252,6 +2275,7 @@ export namespace Prisma {
     id?: true
     isDoubles?: true
     createdAt?: true
+    ratingChange?: true
     winnerId?: true
     loserId?: true
     winnerForwardId?: true
@@ -2299,6 +2323,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: MatchAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MatchSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: MatchMinAggregateInputType
@@ -2329,6 +2365,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: MatchCountAggregateInputType | true
+    _avg?: MatchAvgAggregateInputType
+    _sum?: MatchSumAggregateInputType
     _min?: MatchMinAggregateInputType
     _max?: MatchMaxAggregateInputType
   }
@@ -2337,6 +2375,7 @@ export namespace Prisma {
     id: string
     isDoubles: boolean
     createdAt: Date
+    ratingChange: number
     winnerId: string | null
     loserId: string | null
     winnerForwardId: string | null
@@ -2344,6 +2383,8 @@ export namespace Prisma {
     loserForwardId: string | null
     loserDefensiveId: string | null
     _count: MatchCountAggregateOutputType | null
+    _avg: MatchAvgAggregateOutputType | null
+    _sum: MatchSumAggregateOutputType | null
     _min: MatchMinAggregateOutputType | null
     _max: MatchMaxAggregateOutputType | null
   }
@@ -2366,6 +2407,7 @@ export namespace Prisma {
     id?: boolean
     isDoubles?: boolean
     createdAt?: boolean
+    ratingChange?: boolean
     winnerId?: boolean
     loserId?: boolean
     winnerForwardId?: boolean
@@ -2386,6 +2428,7 @@ export namespace Prisma {
     id?: boolean
     isDoubles?: boolean
     createdAt?: boolean
+    ratingChange?: boolean
     winnerId?: boolean
     loserId?: boolean
     winnerForwardId?: boolean
@@ -2394,7 +2437,7 @@ export namespace Prisma {
     loserDefensiveId?: boolean
   }
 
-  export type MatchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "isDoubles" | "createdAt" | "winnerId" | "loserId" | "winnerForwardId" | "winnerDefensiveId" | "loserForwardId" | "loserDefensiveId", ExtArgs["result"]["match"]>
+  export type MatchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "isDoubles" | "createdAt" | "ratingChange" | "winnerId" | "loserId" | "winnerForwardId" | "winnerDefensiveId" | "loserForwardId" | "loserDefensiveId", ExtArgs["result"]["match"]>
   export type MatchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     winner?: boolean | Match$winnerArgs<ExtArgs>
     loser?: boolean | Match$loserArgs<ExtArgs>
@@ -2418,6 +2461,7 @@ export namespace Prisma {
       id: string
       isDoubles: boolean
       createdAt: Date
+      ratingChange: number
       winnerId: string | null
       loserId: string | null
       winnerForwardId: string | null
@@ -2825,6 +2869,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Match", 'String'>
     readonly isDoubles: FieldRef<"Match", 'Boolean'>
     readonly createdAt: FieldRef<"Match", 'DateTime'>
+    readonly ratingChange: FieldRef<"Match", 'Int'>
     readonly winnerId: FieldRef<"Match", 'String'>
     readonly loserId: FieldRef<"Match", 'String'>
     readonly winnerForwardId: FieldRef<"Match", 'String'>
@@ -3352,6 +3397,7 @@ export namespace Prisma {
     id: 'id',
     isDoubles: 'isDoubles',
     createdAt: 'createdAt',
+    ratingChange: 'ratingChange',
     winnerId: 'winnerId',
     loserId: 'loserId',
     winnerForwardId: 'winnerForwardId',
@@ -3399,16 +3445,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
+   * Reference to a field of type 'Int'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
   /**
-   * Reference to a field of type 'Float[]'
+   * Reference to a field of type 'Int[]'
    */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -3434,16 +3480,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Float'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'Float[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -3456,9 +3502,9 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
-    forwardRating?: FloatFilter<"User"> | number
-    defensiveRating?: FloatFilter<"User"> | number
-    singlesRating?: FloatFilter<"User"> | number
+    forwardRating?: IntFilter<"User"> | number
+    defensiveRating?: IntFilter<"User"> | number
+    singlesRating?: IntFilter<"User"> | number
     wonSingles?: MatchListRelationFilter
     lostSingles?: MatchListRelationFilter
     wonDoublesForward?: MatchListRelationFilter
@@ -3487,9 +3533,9 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    forwardRating?: FloatFilter<"User"> | number
-    defensiveRating?: FloatFilter<"User"> | number
-    singlesRating?: FloatFilter<"User"> | number
+    forwardRating?: IntFilter<"User"> | number
+    defensiveRating?: IntFilter<"User"> | number
+    singlesRating?: IntFilter<"User"> | number
     wonSingles?: MatchListRelationFilter
     lostSingles?: MatchListRelationFilter
     wonDoublesForward?: MatchListRelationFilter
@@ -3517,9 +3563,9 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
     name?: StringWithAggregatesFilter<"User"> | string
-    forwardRating?: FloatWithAggregatesFilter<"User"> | number
-    defensiveRating?: FloatWithAggregatesFilter<"User"> | number
-    singlesRating?: FloatWithAggregatesFilter<"User"> | number
+    forwardRating?: IntWithAggregatesFilter<"User"> | number
+    defensiveRating?: IntWithAggregatesFilter<"User"> | number
+    singlesRating?: IntWithAggregatesFilter<"User"> | number
   }
 
   export type MatchWhereInput = {
@@ -3529,6 +3575,7 @@ export namespace Prisma {
     id?: StringFilter<"Match"> | string
     isDoubles?: BoolFilter<"Match"> | boolean
     createdAt?: DateTimeFilter<"Match"> | Date | string
+    ratingChange?: IntFilter<"Match"> | number
     winnerId?: StringNullableFilter<"Match"> | string | null
     loserId?: StringNullableFilter<"Match"> | string | null
     winnerForwardId?: StringNullableFilter<"Match"> | string | null
@@ -3547,6 +3594,7 @@ export namespace Prisma {
     id?: SortOrder
     isDoubles?: SortOrder
     createdAt?: SortOrder
+    ratingChange?: SortOrder
     winnerId?: SortOrder
     loserId?: SortOrder
     winnerForwardId?: SortOrder
@@ -3568,6 +3616,7 @@ export namespace Prisma {
     NOT?: MatchWhereInput | MatchWhereInput[]
     isDoubles?: BoolFilter<"Match"> | boolean
     createdAt?: DateTimeFilter<"Match"> | Date | string
+    ratingChange?: IntFilter<"Match"> | number
     winnerId?: StringNullableFilter<"Match"> | string | null
     loserId?: StringNullableFilter<"Match"> | string | null
     winnerForwardId?: StringNullableFilter<"Match"> | string | null
@@ -3586,6 +3635,7 @@ export namespace Prisma {
     id?: SortOrder
     isDoubles?: SortOrder
     createdAt?: SortOrder
+    ratingChange?: SortOrder
     winnerId?: SortOrder
     loserId?: SortOrder
     winnerForwardId?: SortOrder
@@ -3593,8 +3643,10 @@ export namespace Prisma {
     loserForwardId?: SortOrder
     loserDefensiveId?: SortOrder
     _count?: MatchCountOrderByAggregateInput
+    _avg?: MatchAvgOrderByAggregateInput
     _max?: MatchMaxOrderByAggregateInput
     _min?: MatchMinOrderByAggregateInput
+    _sum?: MatchSumOrderByAggregateInput
   }
 
   export type MatchScalarWhereWithAggregatesInput = {
@@ -3604,6 +3656,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Match"> | string
     isDoubles?: BoolWithAggregatesFilter<"Match"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Match"> | Date | string
+    ratingChange?: IntWithAggregatesFilter<"Match"> | number
     winnerId?: StringNullableWithAggregatesFilter<"Match"> | string | null
     loserId?: StringNullableWithAggregatesFilter<"Match"> | string | null
     winnerForwardId?: StringNullableWithAggregatesFilter<"Match"> | string | null
@@ -3642,9 +3695,9 @@ export namespace Prisma {
 
   export type UserUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUpdateManyWithoutWinnerNestedInput
     lostSingles?: MatchUpdateManyWithoutLoserNestedInput
     wonDoublesForward?: MatchUpdateManyWithoutWinnerForwardNestedInput
@@ -3655,9 +3708,9 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUncheckedUpdateManyWithoutWinnerNestedInput
     lostSingles?: MatchUncheckedUpdateManyWithoutLoserNestedInput
     wonDoublesForward?: MatchUncheckedUpdateManyWithoutWinnerForwardNestedInput
@@ -3676,22 +3729,23 @@ export namespace Prisma {
 
   export type UserUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserUncheckedUpdateManyInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
   }
 
   export type MatchCreateInput = {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
@@ -3704,6 +3758,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -3715,6 +3770,7 @@ export namespace Prisma {
   export type MatchUpdateInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
@@ -3726,6 +3782,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3738,6 +3795,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -3749,11 +3807,13 @@ export namespace Prisma {
   export type MatchUpdateManyMutationInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
   }
 
   export type MatchUncheckedUpdateManyInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3777,15 +3837,15 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type MatchListRelationFilter = {
@@ -3852,20 +3912,20 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
     _count?: NestedIntFilter<$PrismaModel>
     _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -3909,6 +3969,7 @@ export namespace Prisma {
     id?: SortOrder
     isDoubles?: SortOrder
     createdAt?: SortOrder
+    ratingChange?: SortOrder
     winnerId?: SortOrder
     loserId?: SortOrder
     winnerForwardId?: SortOrder
@@ -3917,10 +3978,15 @@ export namespace Prisma {
     loserDefensiveId?: SortOrder
   }
 
+  export type MatchAvgOrderByAggregateInput = {
+    ratingChange?: SortOrder
+  }
+
   export type MatchMaxOrderByAggregateInput = {
     id?: SortOrder
     isDoubles?: SortOrder
     createdAt?: SortOrder
+    ratingChange?: SortOrder
     winnerId?: SortOrder
     loserId?: SortOrder
     winnerForwardId?: SortOrder
@@ -3933,12 +3999,17 @@ export namespace Prisma {
     id?: SortOrder
     isDoubles?: SortOrder
     createdAt?: SortOrder
+    ratingChange?: SortOrder
     winnerId?: SortOrder
     loserId?: SortOrder
     winnerForwardId?: SortOrder
     winnerDefensiveId?: SortOrder
     loserForwardId?: SortOrder
     loserDefensiveId?: SortOrder
+  }
+
+  export type MatchSumOrderByAggregateInput = {
+    ratingChange?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -4070,7 +4141,7 @@ export namespace Prisma {
     set?: string
   }
 
-  export type FloatFieldUpdateOperationsInput = {
+  export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
@@ -4369,15 +4440,15 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -4397,7 +4468,7 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -4405,10 +4476,15 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+  export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
     notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -4416,12 +4492,7 @@ export namespace Prisma {
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -4511,6 +4582,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
     winnerDefensive?: UserCreateNestedOneWithoutWonDoublesDefensiveInput
@@ -4522,6 +4594,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     loserId?: string | null
     winnerForwardId?: string | null
     winnerDefensiveId?: string | null
@@ -4542,6 +4615,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
     winnerDefensive?: UserCreateNestedOneWithoutWonDoublesDefensiveInput
@@ -4553,6 +4627,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     winnerForwardId?: string | null
     winnerDefensiveId?: string | null
@@ -4573,6 +4648,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerDefensive?: UserCreateNestedOneWithoutWonDoublesDefensiveInput
@@ -4584,6 +4660,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     loserId?: string | null
     winnerDefensiveId?: string | null
@@ -4604,6 +4681,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
@@ -4615,6 +4693,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -4635,6 +4714,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
@@ -4646,6 +4726,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -4666,6 +4747,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
@@ -4677,6 +4759,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -4716,6 +4799,7 @@ export namespace Prisma {
     id?: StringFilter<"Match"> | string
     isDoubles?: BoolFilter<"Match"> | boolean
     createdAt?: DateTimeFilter<"Match"> | Date | string
+    ratingChange?: IntFilter<"Match"> | number
     winnerId?: StringNullableFilter<"Match"> | string | null
     loserId?: StringNullableFilter<"Match"> | string | null
     winnerForwardId?: StringNullableFilter<"Match"> | string | null
@@ -5003,9 +5087,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutWonSinglesInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     lostSingles?: MatchUpdateManyWithoutLoserNestedInput
     wonDoublesForward?: MatchUpdateManyWithoutWinnerForwardNestedInput
     wonDoublesDefensive?: MatchUpdateManyWithoutWinnerDefensiveNestedInput
@@ -5015,9 +5099,9 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutWonSinglesInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     lostSingles?: MatchUncheckedUpdateManyWithoutLoserNestedInput
     wonDoublesForward?: MatchUncheckedUpdateManyWithoutWinnerForwardNestedInput
     wonDoublesDefensive?: MatchUncheckedUpdateManyWithoutWinnerDefensiveNestedInput
@@ -5038,9 +5122,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutLostSinglesInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUpdateManyWithoutWinnerNestedInput
     wonDoublesForward?: MatchUpdateManyWithoutWinnerForwardNestedInput
     wonDoublesDefensive?: MatchUpdateManyWithoutWinnerDefensiveNestedInput
@@ -5050,9 +5134,9 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutLostSinglesInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUncheckedUpdateManyWithoutWinnerNestedInput
     wonDoublesForward?: MatchUncheckedUpdateManyWithoutWinnerForwardNestedInput
     wonDoublesDefensive?: MatchUncheckedUpdateManyWithoutWinnerDefensiveNestedInput
@@ -5073,9 +5157,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutWonDoublesForwardInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUpdateManyWithoutWinnerNestedInput
     lostSingles?: MatchUpdateManyWithoutLoserNestedInput
     wonDoublesDefensive?: MatchUpdateManyWithoutWinnerDefensiveNestedInput
@@ -5085,9 +5169,9 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutWonDoublesForwardInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUncheckedUpdateManyWithoutWinnerNestedInput
     lostSingles?: MatchUncheckedUpdateManyWithoutLoserNestedInput
     wonDoublesDefensive?: MatchUncheckedUpdateManyWithoutWinnerDefensiveNestedInput
@@ -5108,9 +5192,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutWonDoublesDefensiveInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUpdateManyWithoutWinnerNestedInput
     lostSingles?: MatchUpdateManyWithoutLoserNestedInput
     wonDoublesForward?: MatchUpdateManyWithoutWinnerForwardNestedInput
@@ -5120,9 +5204,9 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutWonDoublesDefensiveInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUncheckedUpdateManyWithoutWinnerNestedInput
     lostSingles?: MatchUncheckedUpdateManyWithoutLoserNestedInput
     wonDoublesForward?: MatchUncheckedUpdateManyWithoutWinnerForwardNestedInput
@@ -5143,9 +5227,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutLostDoublesForwardInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUpdateManyWithoutWinnerNestedInput
     lostSingles?: MatchUpdateManyWithoutLoserNestedInput
     wonDoublesForward?: MatchUpdateManyWithoutWinnerForwardNestedInput
@@ -5155,9 +5239,9 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutLostDoublesForwardInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUncheckedUpdateManyWithoutWinnerNestedInput
     lostSingles?: MatchUncheckedUpdateManyWithoutLoserNestedInput
     wonDoublesForward?: MatchUncheckedUpdateManyWithoutWinnerForwardNestedInput
@@ -5178,9 +5262,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutLostDoublesDefensiveInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUpdateManyWithoutWinnerNestedInput
     lostSingles?: MatchUpdateManyWithoutLoserNestedInput
     wonDoublesForward?: MatchUpdateManyWithoutWinnerForwardNestedInput
@@ -5190,9 +5274,9 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutLostDoublesDefensiveInput = {
     name?: StringFieldUpdateOperationsInput | string
-    forwardRating?: FloatFieldUpdateOperationsInput | number
-    defensiveRating?: FloatFieldUpdateOperationsInput | number
-    singlesRating?: FloatFieldUpdateOperationsInput | number
+    forwardRating?: IntFieldUpdateOperationsInput | number
+    defensiveRating?: IntFieldUpdateOperationsInput | number
+    singlesRating?: IntFieldUpdateOperationsInput | number
     wonSingles?: MatchUncheckedUpdateManyWithoutWinnerNestedInput
     lostSingles?: MatchUncheckedUpdateManyWithoutLoserNestedInput
     wonDoublesForward?: MatchUncheckedUpdateManyWithoutWinnerForwardNestedInput
@@ -5204,6 +5288,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     loserId?: string | null
     winnerForwardId?: string | null
     winnerDefensiveId?: string | null
@@ -5215,6 +5300,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     winnerForwardId?: string | null
     winnerDefensiveId?: string | null
@@ -5226,6 +5312,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     loserId?: string | null
     winnerDefensiveId?: string | null
@@ -5237,6 +5324,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -5248,6 +5336,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -5259,6 +5348,7 @@ export namespace Prisma {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
+    ratingChange: number
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -5269,6 +5359,7 @@ export namespace Prisma {
   export type MatchUpdateWithoutWinnerInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
     winnerDefensive?: UserUpdateOneWithoutWonDoublesDefensiveNestedInput
@@ -5279,6 +5370,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateWithoutWinnerInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5289,6 +5381,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateManyWithoutWinnerInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5299,6 +5392,7 @@ export namespace Prisma {
   export type MatchUpdateWithoutLoserInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
     winnerDefensive?: UserUpdateOneWithoutWonDoublesDefensiveNestedInput
@@ -5309,6 +5403,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateWithoutLoserInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5319,6 +5414,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateManyWithoutLoserInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5329,6 +5425,7 @@ export namespace Prisma {
   export type MatchUpdateWithoutWinnerForwardInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerDefensive?: UserUpdateOneWithoutWonDoublesDefensiveNestedInput
@@ -5339,6 +5436,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateWithoutWinnerForwardInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5349,6 +5447,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateManyWithoutWinnerForwardInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5359,6 +5458,7 @@ export namespace Prisma {
   export type MatchUpdateWithoutWinnerDefensiveInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
@@ -5369,6 +5469,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateWithoutWinnerDefensiveInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5379,6 +5480,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateManyWithoutWinnerDefensiveInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5389,6 +5491,7 @@ export namespace Prisma {
   export type MatchUpdateWithoutLoserForwardInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
@@ -5399,6 +5502,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateWithoutLoserForwardInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5409,6 +5513,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateManyWithoutLoserForwardInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5419,6 +5524,7 @@ export namespace Prisma {
   export type MatchUpdateWithoutLoserDefensiveInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
@@ -5429,6 +5535,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateWithoutLoserDefensiveInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5439,6 +5546,7 @@ export namespace Prisma {
   export type MatchUncheckedUpdateManyWithoutLoserDefensiveInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ratingChange?: IntFieldUpdateOperationsInput | number
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null

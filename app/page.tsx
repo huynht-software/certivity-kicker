@@ -1,14 +1,14 @@
 import MatchForm from '@/components/MatchForm'
 import MatchList from '@/components/MatchList'
-import { getAllUsers, getMatches } from './actions'
+import { getMatchesWithUsers, getUsers } from './actions'
 
 export default async function Home() {
-  const allUsers = await getAllUsers()
-  const recentMatches = await getMatches({ limit: 10 })
+  const allUsers = await getUsers()
+  const recentMatches = await getMatchesWithUsers({ limit: 10 })
 
   return (
-    <div className="p-4 flex justify-center gap-4 w-full">
-      <div className="w-2/3 flex flex-col">
+    <div className="flex py-4 justify-center gap-4 w-full">
+      <div className="w-5/6 lg:w-2/3 flex flex-col">
         <MatchForm allUsers={allUsers} />
 
         <div className="mt-12 flex flex-col gap-2">

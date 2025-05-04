@@ -1,10 +1,10 @@
 import MatchList from '@/components/MatchList'
-import { getMatches } from '../actions'
+import { getMatchesWithUsers } from '../actions'
 
 type Props = {}
 
 async function Matches(props: Props) {
-  const allMatches = await getMatches()
+  const allMatches = await getMatchesWithUsers()
 
   return (
     <>

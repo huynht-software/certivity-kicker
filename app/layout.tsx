@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
-        <div className="absolute w-screen top-[60px]">{children}</div>
+        <div className="w-screen pt-[60px] overscroll-y-auto">{children}</div>
         <Toaster />
       </body>
     </html>

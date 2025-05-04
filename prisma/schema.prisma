@@ -11,9 +11,9 @@ datasource db {
 model User {
   id                   String  @id @default(auto()) @map("_id") @db.ObjectId
   name                 String
-  forwardRating        Float   @default(1000.0)
-  defensiveRating      Float   @default(1000.0)
-  singlesRating        Float   @default(1000.0)
+  forwardRating        Int     @default(1000)
+  defensiveRating      Int     @default(1000)
+  singlesRating        Int     @default(1000)
   wonSingles           Match[] @relation("SinglesWinner")
   lostSingles          Match[] @relation("SinglesLoser")
   wonDoublesForward    Match[] @relation("DoublesWinnerForward")
@@ -25,9 +25,10 @@ model User {
 }
 
 model Match {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  isDoubles Boolean
-  createdAt DateTime @default(now())
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  isDoubles    Boolean
+  createdAt    DateTime @default(now())
+  ratingChange Int
 
   // Singles Match
   winnerId String? @db.ObjectId

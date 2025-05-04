@@ -51,13 +51,14 @@ function DoublesMatchForm(props: Props) {
 
     try {
       await postDoublesMatch({
+        type: 'doubles',
         winner: {
-          forwardId: winnerF!.id,
-          defensiveId: winnerD!.id,
+          forward: winnerF!,
+          defensive: winnerD!,
         },
         loser: {
-          forwardId: loserF!.id,
-          defensiveId: loserD!.id,
+          forward: loserF!,
+          defensive: loserD!,
         },
       })
 
@@ -78,7 +79,7 @@ function DoublesMatchForm(props: Props) {
   return (
     <>
       <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-6 justify-between">
+        <div className="flex flex-col lg:flex-row items-center lg:gap-6 justify-between">
           <div className="flex flex-col w-full gap-2">
             Winner:
             <DropdownInput

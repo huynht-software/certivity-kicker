@@ -2,18 +2,12 @@
 
 import { User } from '@/app/generated/prisma'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useState } from 'react'
 import DoublesMatchForm from './DoublesMatchForm'
 import SinglesMatchForm from './SingleMatchForm'
 
 type Props = { allUsers: User[] }
 
-const MatchTypes = ['doubles', 'singles'] as const
-type MatchType = (typeof MatchTypes)[number]
-
 function MatchForm(props: Props) {
-  const [matchType, setMatchType] = useState<MatchType>('doubles')
-
   return (
     <>
       <div className="w-full flex justify-center">

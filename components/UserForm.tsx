@@ -15,7 +15,12 @@ function UserForm(props: Props) {
   const [loading, setLoading] = useState(false)
 
   async function createNewUser() {
-    if (password !== 'certivity123') setLoading(true)
+    // if (password !== 'certivity123') {
+    //   toast('wrong password')
+    //   return
+    // }
+
+    setLoading(true)
 
     try {
       await createUser({ name: name })
@@ -34,7 +39,7 @@ function UserForm(props: Props) {
     <>
       <div className="flex flex-col gap-2 p-4 border rounded-md bg-gray-200">
         <div className="font-bold">Submit new user</div>
-        <div className="flex gap-2">
+        <div className="flex flex-col lg:flex-row gap-2">
           Name
           <input
             type="text"

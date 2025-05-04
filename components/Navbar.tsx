@@ -6,7 +6,7 @@ type Props = {}
 function Navbar(props: Props) {
   return (
     <>
-      <div className="w-full absolute top-0 flex p-2 bg-red-500 items-center">
+      <div className="w-full fixed top-0 flex p-2 bg-red-500 items-center">
         <Link href="/">
           <div className="rounded-xl bg-white p-[7px] cursor-pointer hover:bg-gray-200">
             <Image

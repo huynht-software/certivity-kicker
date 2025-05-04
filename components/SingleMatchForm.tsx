@@ -34,8 +34,9 @@ function SinglesMatchForm(props: Props) {
 
     try {
       await postSinglesMatch({
-        winnerId: winner.id,
-        loserId: loser.id,
+        type: 'singles',
+        winner: winner,
+        loser: loser,
       })
 
       setWinner(undefined)

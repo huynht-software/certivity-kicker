@@ -98,7 +98,7 @@ function UserList(props: Props) {
           <tbody>
             {sortedUsers.map((user) => {
               return (
-                <tr key={user.id}>
+                <tr key={user.id} onClick={() => console.log(user)}>
                   <td>{user.name}</td>
                   <td>{user.singlesRating}</td>
                   <td>{user.forwardRating}</td>

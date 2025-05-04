@@ -1,24 +1,15 @@
 'use client'
 
-import { Match, User } from '@/app/generated/prisma'
+import { MatchWithUsers } from '@/lib/types'
 import { Util } from '@/lib/utils'
 import { ArrowDownIcon, ArrowUpIcon } from 'lucide-react'
 import { useMemo, useState } from 'react'
-
-type MatchWithUsers = Match & {
-  winner: User | null
-  loser: User | null
-  winnerForward: User | null
-  winnerDefensive: User | null
-  loserForward: User | null
-  loserDefensive: User | null
-}
 
 type Props = {
   allMatches: MatchWithUsers[]
 }
 
-const UserListColumns = ['Winner', 'Loser', 'Date'] as const
+const UserListColumns = ['Winner', 'Loser', '±', 'Date'] as const
 
 type SortDirection = 'asc' | 'desc'
 
@@ -56,7 +47,7 @@ function MatchList(props: Props) {
                         setSortDirection(revertDirection(sortDirection))
                       }
                     >
-                      <div className="flex gap-1 items-center">
+                      <div className="flex gap-1 items-center justify-end lg:justify-start">
                         <div>{columnName}</div>
                         <div>
                           {sortDirection === 'desc' ? (
@@ -71,8 +62,12 @@ function MatchList(props: Props) {
                 }
                 return (
                   <td key={columnName} className="pb-2">
-                    <div className="flex gap-1 items-center">
-                      <div>{columnName}</div>
+                    <div
+                      className={`w-full flex ${
+                        columnName === '±' ? 'pl-1' : ''
+                      }`}
+                    >
+                      {columnName}
                     </div>
                   </td>
                 )
@@ -110,8 +105,9 @@ function MatchList(props: Props) {
                       </td>
                     </>
                   )}
+                  <td>{match.ratingChange}</td>
                   <td>
-                    <div className="flex gap-1 items-end">
+                    <div className="flex flex-col items-end lg:items-start">
                       {Util.formatDate(match.createdAt)}
                       <div className="text-xs pb-[2px]">
                         {Util.formatTime(match.createdAt)}
