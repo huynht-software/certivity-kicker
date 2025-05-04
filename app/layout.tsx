@@ -6,6 +6,7 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Certivity Kicker',
   description: 'Keeping score for bragging rights',
+  manifest: '/manifest.webmanifest',
 }
 
 export default function RootLayout({
