@@ -3,6 +3,7 @@
 import { createUser } from '@/app/actions'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { toast } from 'sonner'
 import TextButton from './TextButton'
 
 type Props = {}
@@ -15,10 +16,10 @@ function UserForm(props: Props) {
   const [loading, setLoading] = useState(false)
 
   async function createNewUser() {
-    // if (password !== 'certivity123') {
-    //   toast('wrong password')
-    //   return
-    // }
+    if (password !== 'certivity123') {
+      toast('wrong password')
+      return
+    }
 
     setLoading(true)
 
