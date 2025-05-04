@@ -52,7 +52,7 @@ function SinglesMatchForm(props: Props) {
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-5">
         <div className="flex items-center gap-6 justify-between">
           <div className="flex flex-col w-full gap-2">
             Winner:

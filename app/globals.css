@@ -5,6 +5,10 @@
   @apply cursor-pointer hover:bg-gray-200 rounded-md bg-white border border-gray-800 w-fit px-4 py-1;
 }
 
+.negative-button {
+  @apply cursor-pointer hover:bg-gray-200 rounded-md bg-white border border-red-500 text-red-500 w-fit px-4 py-1;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

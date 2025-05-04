@@ -2,6 +2,7 @@
 import prisma from '@/lib/prisma'
 import { RatingUtils } from '@/lib/ratingUtils'
 import { DoublesMatchOutcome, SinglesMatchOutcome } from '@/lib/types'
+import { Match } from './generated/prisma'
 
 // USERS
 // read
@@ -9,7 +10,7 @@ export async function getUsers() {
   try {
     const users = await prisma.user.findMany({
       orderBy: {
-        name: 'desc',
+        name: 'asc',
       },
     })
 
@@ -61,6 +62,33 @@ export async function getMatchesWithUsers(input?: { limit?: number }) {
         createdAt: 'desc',
       },
       take: input?.limit,
+    })
+
+    return matches
+  } catch (error) {
+    console.error('Error fetching users:', error)
+    throw new Error('Failed to fetch users')
+  }
+}
+
+export async function getMatchWithUsers(input: { id: string }) {
+  try {
+    const matches = await prisma.match.findFirstOrThrow({
+      where: {
+        id: input.id,
+      },
+      include: {
+        // singles
+        winner: true,
+        loser: true,
+
+        // doubles
+        winnerForward: true,
+        winnerDefensive: true,
+
+        loserForward: true,
+        loserDefensive: true,
+      },
     })
 
     return matches
@@ -122,34 +150,99 @@ export async function postDoublesMatch(matchOutcome: DoublesMatchOutcome) {
       },
     })
 
-    await prisma.user.updateMany({
-      where: {
-        id: {
-          in: [
-            matchOutcome.winner.forward.id,
-            matchOutcome.winner.defensive.id,
-          ],
-        },
-      },
-      data: {
-        forwardRating: { increment: ratingChange },
-        defensiveRating: { increment: ratingChange },
-      },
+    await prisma.user.update({
+      where: { id: matchOutcome.winner.forward.id },
+      data: { forwardRating: { increment: ratingChange } },
     })
 
-    await prisma.user.updateMany({
-      where: {
-        id: {
-          in: [matchOutcome.loser.forward.id, matchOutcome.loser.defensive.id],
-        },
-      },
-      data: {
-        forwardRating: { increment: -ratingChange },
-        defensiveRating: { increment: -ratingChange },
-      },
+    await prisma.user.update({
+      where: { id: matchOutcome.winner.defensive.id },
+      data: { defensiveRating: { increment: ratingChange } },
+    })
+
+    await prisma.user.update({
+      where: { id: matchOutcome.loser.forward.id },
+      data: { forwardRating: { increment: -ratingChange } },
+    })
+
+    await prisma.user.update({
+      where: { id: matchOutcome.loser.defensive.id },
+      data: { defensiveRating: { increment: -ratingChange } },
     })
 
     return match
+  } catch (error: any) {
+    throw new Error('Failed to create singles match')
+  }
+}
+
+// delete doubles match
+export async function deleteDoublesMatch(input: { match: Match }) {
+  try {
+    const { match } = input
+    const ratingChange = match.ratingChange
+
+    await prisma.match.delete({
+      where: {
+        id: input.match.id,
+      },
+    })
+
+    await prisma.user.update({
+      where: { id: match.winnerForwardId! },
+      data: { forwardRating: { increment: -ratingChange } },
+    })
+
+    await prisma.user.update({
+      where: { id: match.winnerDefensiveId! },
+      data: { defensiveRating: { increment: -ratingChange } },
+    })
+
+    await prisma.user.update({
+      where: { id: match.loserForwardId! },
+      data: { forwardRating: { increment: ratingChange } },
+    })
+
+    await prisma.user.update({
+      where: { id: match.loserDefensiveId! },
+      data: { defensiveRating: { increment: ratingChange } },
+    })
+  } catch (error: any) {
+    throw new Error('Failed to create singles match')
+  }
+}
+
+// delete singles match
+export async function deleteSinglesMatch(input: { match: Match }) {
+  try {
+    const { match } = input
+    const ratingChange = match.ratingChange
+
+    await prisma.match.delete({
+      where: {
+        id: input.match.id,
+      },
+    })
+
+    await prisma.user.update({
+      where: { id: match.winnerForwardId! },
+      data: { forwardRating: { increment: -ratingChange } },
+    })
+
+    await prisma.user.update({
+      where: { id: match.winnerDefensiveId! },
+      data: { defensiveRating: { increment: -ratingChange } },
+    })
+
+    await prisma.user.update({
+      where: { id: match.loserForwardId! },
+      data: { forwardRating: { increment: ratingChange } },
+    })
+
+    await prisma.user.update({
+      where: { id: match.loserDefensiveId! },
+      data: { defensiveRating: { increment: ratingChange } },
+    })
   } catch (error: any) {
     throw new Error('Failed to create singles match')
   }

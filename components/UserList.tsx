@@ -47,7 +47,7 @@ function UserList(props: Props) {
 
       return sort.direction === 'desc' ? comparison * -1 : comparison
     })
-  }, [sort])
+  }, [sort, props.allUsers])
 
   function toggleSort(columnName: UserListColumn) {
     const newDirection =

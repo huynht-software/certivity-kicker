@@ -121,7 +121,11 @@ export function DropdownInput<T>(props: SimpleSelectProps<T>) {
         }}
       >
         <Command>
-          {props.searchable && <CommandInput placeholder="Search..." />}
+          {props.searchable && (
+            <CommandInput
+              placeholder={(props.placeholder ?? 'Search') + '...'}
+            />
+          )}
           <CommandEmpty>No entries found.</CommandEmpty>
           <CommandList>
             <CommandGroup>

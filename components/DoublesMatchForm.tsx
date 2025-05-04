@@ -2,6 +2,7 @@
 
 import { postDoublesMatch } from '@/app/actions'
 import { User } from '@/app/generated/prisma'
+import { ShieldIcon, SwordIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -78,7 +79,7 @@ function DoublesMatchForm(props: Props) {
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-5">
         <div className="flex flex-col lg:flex-row items-center lg:gap-6 justify-between">
           <div className="flex flex-col w-full gap-2">
             Winner:
@@ -88,6 +89,7 @@ function DoublesMatchForm(props: Props) {
               currentSelection={winnerD}
               onSelection={(selection) => setWinnerD(selection)}
               placeholder="Defensive player"
+              icon={<ShieldIcon className="size-5 text-gray-400" />}
               searchable
             />
             <DropdownInput
@@ -96,6 +98,7 @@ function DoublesMatchForm(props: Props) {
               currentSelection={winnerF}
               onSelection={(selection) => setWinnerF(selection)}
               placeholder="Forward player"
+              icon={<SwordIcon className="size-5 text-gray-400" />}
               searchable
             />
           </div>
@@ -108,6 +111,7 @@ function DoublesMatchForm(props: Props) {
               currentSelection={loserD}
               onSelection={(selection) => setLoserD(selection)}
               placeholder="Defensive player"
+              icon={<ShieldIcon className="size-5 text-gray-400" />}
               searchable
             />
             <DropdownInput
@@ -116,6 +120,7 @@ function DoublesMatchForm(props: Props) {
               currentSelection={loserF}
               onSelection={(selection) => setLoserF(selection)}
               placeholder="Forward player"
+              icon={<SwordIcon className="size-5 text-gray-400" />}
               searchable
             />
           </div>

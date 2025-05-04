@@ -1,7 +1,5 @@
 import LoadingDiv from '@/components/LoadingDiv'
-import { useOutsideClick } from '@/hooks/useOutsideClick'
-import { ChevronDownIcon } from 'lucide-react'
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 
 type Props = {
   buttonText: string
@@ -27,16 +25,10 @@ export default function TextButton(props: Props) {
     style = 'default',
   } = props
 
-  const [showAdditionalOptions, setShowAdditionalOptions] = useState(false)
-
-  const additionalOptionsRef = useOutsideClick(() => {
-    setShowAdditionalOptions(false)
-  })
-
   const styleMapping = new Map<ButtonStyle, string>([
     ['default', 'default-button'],
     ['outline', 'ctvtOutlineButton'],
-    ['negative', 'ctvtNegativeButton'],
+    ['negative', 'negative-button'],
   ])
 
   const buttonStyle = `${style ? styleMapping.get(style) : ''} ${
@@ -69,42 +61,6 @@ export default function TextButton(props: Props) {
               {props.icon && props.icon}
               {props.buttonText}
             </div>
-            {props.additionalOptions && (
-              <>
-                <div
-                  className={buttonStyle + ' cursor-pointer'}
-                  style={{
-                    paddingInline: '3px',
-                    borderTopLeftRadius: 0,
-                    borderBottomLeftRadius: 0,
-                  }}
-                  onClick={() => setShowAdditionalOptions(true)}
-                >
-                  <ChevronDownIcon className="size-4" />
-                </div>
-                {showAdditionalOptions && props.additionalOptions && (
-                  <div
-                    ref={additionalOptionsRef}
-                    className="absolute right-0 top-10 z-20 rounded-md border bg-white p-1 text-sm"
-                  >
-                    {props.additionalOptions.map((option) => {
-                      return (
-                        <div
-                          className="flex cursor-pointer rounded-md p-2 hover:bg-gray-200"
-                          onClick={() => {
-                            option.onClick()
-                            setShowAdditionalOptions(false)
-                          }}
-                        >
-                          {option.icon}
-                          {option.text}
-                        </div>
-                      )
-                    })}
-                  </div>
-                )}
-              </>
-            )}
           </div>
         </button>
       ) : (

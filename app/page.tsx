@@ -7,7 +7,7 @@ export default async function Home() {
   const recentMatches = await getMatchesWithUsers({ limit: 10 })
 
   return (
-    <div className="flex py-4 justify-center gap-4 w-full">
+    <div className="flex justify-center gap-4 w-full">
       <div className="w-5/6 lg:w-2/3 flex flex-col">
         <MatchForm allUsers={allUsers} />
 

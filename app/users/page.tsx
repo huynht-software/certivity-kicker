@@ -9,7 +9,7 @@ async function Users(props: Props) {
 
   return (
     <>
-      <div className="p-4 flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
         <UserForm />
         <UserList allUsers={allUsers} />
       </div>

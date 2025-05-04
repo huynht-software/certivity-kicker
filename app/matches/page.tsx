@@ -8,7 +8,7 @@ async function Matches(props: Props) {
 
   return (
     <>
-      <div className="p-4 flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
         <MatchList allMatches={allMatches} />
       </div>
     </>

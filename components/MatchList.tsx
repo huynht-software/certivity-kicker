@@ -3,6 +3,7 @@
 import { MatchWithUsers } from '@/lib/types'
 import { Util } from '@/lib/utils'
 import { ArrowDownIcon, ArrowUpIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useMemo, useState } from 'react'
 
 type Props = {
@@ -14,6 +15,8 @@ const UserListColumns = ['Winner', 'Loser', '±', 'Date'] as const
 type SortDirection = 'asc' | 'desc'
 
 function MatchList(props: Props) {
+  const router = useRouter()
+
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc')
 
   const sortedMatches = useMemo(() => {
@@ -22,7 +25,7 @@ function MatchList(props: Props) {
         ? matchB.createdAt.getTime() - matchA.createdAt.getTime()
         : matchA.createdAt.getTime() - matchB.createdAt.getTime()
     })
-  }, [sortDirection])
+  }, [sortDirection, props.allMatches])
 
   // UTIL
   function revertDirection(direction: SortDirection) {
@@ -77,7 +80,13 @@ function MatchList(props: Props) {
           <tbody>
             {sortedMatches.map((match, i) => {
               return (
-                <tr key={match.id} className={i !== 0 ? 'border-t' : ''}>
+                <tr
+                  key={match.id}
+                  className={`cursor-pointer ${i !== 0 ? 'border-t' : ''}`}
+                  onClick={() => {
+                    router.push(`/matches/${match.id}`)
+                  }}
+                >
                   {match.isDoubles && (
                     <>
                       <td>
