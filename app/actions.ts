@@ -196,7 +196,7 @@ export async function deleteSinglesMatch(input: { match: Match }) {
 
     await prisma.user.update({
       where: { id: match.loserId! },
-      data: { forwardRating: { increment: ratingChange } },
+      data: { singlesRating: { increment: ratingChange } },
     })
 
     revalidatePath('/matches')
