@@ -19,7 +19,7 @@ function Navbar(props: Props) {
           </div>
         </Link>
 
-        <div className="flex h-full text-bold items-center text ml-12 text-white gap-8 divide-solid divide-red-900">
+        <div className="flex h-full text-bold items-center text ml-8 text-white gap-6 divide-solid divide-red-900">
           <Link href="/">HOME</Link>
           <Link href="/users">USERS</Link>
           <Link href="/matches">MATCHES</Link>
