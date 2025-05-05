@@ -69,7 +69,9 @@ function DoublesMatchForm(props: Props) {
       setLoserD(undefined)
       setLoserF(undefined)
 
-      router.refresh()
+      setTimeout(() => {
+        router.refresh()
+      }, 50)
     } catch (e) {
       console.error(e)
     } finally {

@@ -6,7 +6,9 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import TextButton from './TextButton'
 
-type Props = {}
+type Props = {
+  password: string
+}
 
 function UserForm(props: Props) {
   const router = useRouter()
@@ -16,10 +18,7 @@ function UserForm(props: Props) {
   const [loading, setLoading] = useState(false)
 
   async function createNewUser() {
-    if (
-      process.env.NODE_ENV !== 'development' &&
-      password !== process.env.USER_CREATION_PASSWORD
-    ) {
+    if (process.env.NODE_ENV !== 'development' && password !== props.password) {
       toast('wrong password')
       return
     }
@@ -30,8 +29,11 @@ function UserForm(props: Props) {
       await createUser({ name: name })
 
       setName('')
+      setPassword('')
 
-      router.refresh()
+      setTimeout(() => {
+        router.refresh()
+      }, 50)
     } catch (error) {
       console.error('Error creating user:', error)
     } finally {
@@ -53,7 +55,7 @@ function UserForm(props: Props) {
           />
           Password
           <input
-            type="text"
+            type="password"
             className="text-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
