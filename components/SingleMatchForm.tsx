@@ -42,7 +42,9 @@ function SinglesMatchForm(props: Props) {
       setWinner(undefined)
       setLoser(undefined)
 
-      router.refresh()
+      setTimeout(() => {
+        router.refresh()
+      }, 100)
     } catch (e) {
       console.error(e)
     } finally {
