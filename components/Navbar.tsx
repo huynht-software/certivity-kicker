@@ -1,3 +1,4 @@
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -18,10 +19,13 @@ function Navbar(props: Props) {
           </div>
         </Link>
 
-        <div className="flex h-full text-bold text-lg ml-12 text-white gap-8 divide-solid divide-red-900">
+        <div className="flex h-full text-bold items-center text ml-12 text-white gap-8 divide-solid divide-red-900">
           <Link href="/">HOME</Link>
           <Link href="/users">USERS</Link>
           <Link href="/matches">MATCHES</Link>
+          <Link href="/how-to">
+            <QuestionMarkCircleIcon className="size-5" />
+          </Link>
         </div>
       </div>
     </>

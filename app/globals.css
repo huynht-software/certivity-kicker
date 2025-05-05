@@ -5,6 +5,18 @@ body {
   @apply text-gray-800;
 }
 
+h2 {
+  @apply text-2xl font-bold mb-5 mt-12;
+}
+
+h3 {
+  @apply font-bold mb-1 mt-4;
+}
+
+li {
+  @apply ml-6;
+}
+
 .default-button {
   @apply cursor-pointer hover:bg-gray-200 rounded-md bg-white border border-gray-800 w-fit px-4 py-1;
 }
