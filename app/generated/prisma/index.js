@@ -165,7 +165,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mongodb+srv://user:Blutwurst1@cluster0.wnertlp.mongodb.net/certivity-kicker?retryWrites=true&w=majority&appName=Cluster0&maxIdleTimeMS=60000"
+        "value": "mongodb+srv://user:Blutwurst1@cluster0.wnertlp.mongodb.net/certivity-kicker-dev?retryWrites=true&w=majority&appName=Cluster0&maxIdleTimeMS=60000"
       }
     }
   },

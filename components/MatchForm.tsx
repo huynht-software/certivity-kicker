@@ -3,7 +3,7 @@
 import { User } from '@/app/generated/prisma'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import DoublesMatchForm from './DoublesMatchForm'
-import SinglesMatchForm from './SingleMatchForm'
+import SinglesMatchForm from './SinglesMatchForm'
 
 type Props = { allUsers: User[] }
 
