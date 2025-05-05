@@ -31,6 +31,8 @@ export async function createUser({ name }: { name: string }) {
       },
     })
 
+    revalidatePath('/')
+
     return user
   } catch (error: any) {
     // Handle duplicate email error
@@ -123,6 +125,8 @@ export async function postSinglesMatch(matchOutcome: SinglesMatchOutcome) {
       data: { singlesRating: { increment: -ratingChange } },
     })
 
+    revalidatePath('/')
+
     return match
   } catch (error: any) {
     console.error(error)
@@ -171,6 +175,8 @@ export async function postDoublesMatch(matchOutcome: DoublesMatchOutcome) {
       data: { defensiveRating: { increment: -ratingChange } },
     })
 
+    revalidatePath('/')
+
     return match
   } catch (error: any) {
     throw new Error('Failed to create singles match')
@@ -199,7 +205,7 @@ export async function deleteSinglesMatch(input: { match: Match }) {
       data: { singlesRating: { increment: ratingChange } },
     })
 
-    revalidatePath('/matches')
+    revalidatePath('/')
   } catch (error: any) {
     console.error(error)
     throw new Error('Failed to delete singles match')
@@ -238,7 +244,7 @@ export async function deleteDoublesMatch(input: { match: Match }) {
       data: { defensiveRating: { increment: ratingChange } },
     })
 
-    revalidatePath('/matches')
+    revalidatePath('/')
   } catch (error: any) {
     console.error(error)
     throw new Error('Failed to delete doubles match')
