@@ -42,6 +42,7 @@ function DeleteMatchButton(props: Props) {
       console.error(e)
       toast('Error when deleting match')
     } finally {
+      router.refresh()
       router.back()
       setLoading(false)
     }
