@@ -1,23 +1,23 @@
 'use client'
 
-import { User } from '@/app/generated/prisma'
-import { Util } from '@/lib/utils'
+import { UserWithMatches } from '@/lib/types'
+import { UserUtil, Util } from '@/lib/utils'
 import { ArrowDownIcon, ArrowUpIcon } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 type Props = {
-  allUsers: User[]
+  usersWithMatches: UserWithMatches[]
 }
 
-const UserListColumns = [
+export const UserListColumns = [
   'Name',
-  'Single Rating',
-  'Forward Rating',
-  'Defensive Rating',
+  'Singles',
+  'Forward',
+  'Defensive',
 ] as const
-type UserListColumn = (typeof UserListColumns)[number]
+export type UserListColumn = (typeof UserListColumns)[number]
 
-type SortDirection = 'asc' | 'desc'
+export type SortDirection = 'asc' | 'desc'
 
 function UserList(props: Props) {
   const [sort, setSort] = useState<{
@@ -26,28 +26,12 @@ function UserList(props: Props) {
   }>({ column: 'Name', direction: 'desc' })
 
   const sortedUsers = useMemo(() => {
-    return props.allUsers.sort((userA, userB) => {
-      let comparison = 0
-      switch (sort.column) {
-        case 'Name':
-          comparison = userB.name.localeCompare(userA.name)
-          break
-        case 'Single Rating':
-          comparison = userA.singlesRating - userB.singlesRating
-          break
-        case 'Forward Rating':
-          comparison = userA.forwardRating - userB.forwardRating
-          break
-        case 'Defensive Rating':
-          comparison = userA.defensiveRating - userB.defensiveRating
-          break
-        default:
-          Util.exhaustiveGuard(sort.column)
-      }
-
-      return sort.direction === 'desc' ? comparison * -1 : comparison
-    })
-  }, [sort, props.allUsers])
+    return UserUtil.sortUsers(
+      props.usersWithMatches,
+      sort.column,
+      sort.direction
+    )
+  }, [sort, props.usersWithMatches])
 
   function toggleSort(columnName: UserListColumn) {
     const newDirection =
@@ -61,6 +45,56 @@ function UserList(props: Props) {
     if (direction === 'asc') return 'desc'
 
     return 'asc'
+  }
+
+  // RENDER UTIL
+  function getDisplayRank(
+    user: UserWithMatches,
+    type: 'singles' | 'forward' | 'defensive'
+  ) {
+    const gameCount = UserUtil.getGameCount(user)
+    const { rank, gamesPlayed } = (() => {
+      const unranked = { rank: 'unranked', gamesPlayed: 0 }
+
+      switch (type) {
+        case 'singles':
+          if (gameCount.singles === 0) {
+            return unranked
+          }
+          return { rank: user.singlesRating, gamesPlayed: gameCount.singles }
+        case 'forward':
+          if (gameCount.forward === 0) {
+            return unranked
+          }
+          return { rank: user.forwardRating, gamesPlayed: gameCount.forward }
+        case 'defensive':
+          if (gameCount.defensive === 0) {
+            return unranked
+          }
+          return {
+            rank: user.defensiveRating,
+            gamesPlayed: gameCount.defensive,
+          }
+        default:
+          Util.exhaustiveGuard(type)
+          return unranked
+      }
+    })()
+
+    if (rank === 'unranked') {
+      return <div>Unranked</div>
+    }
+
+    return (
+      <>
+        <div className="flex flex-col">
+          <div>{rank}</div>
+          <div className="text-sm -mt-1 text-gray-600">
+            {gamesPlayed} game{gamesPlayed > 1 ? 's' : ''}
+          </div>
+        </div>
+      </>
+    )
   }
 
   return (
@@ -99,10 +133,20 @@ function UserList(props: Props) {
             {sortedUsers.map((user) => {
               return (
                 <tr key={user.id} onClick={() => console.log(user)}>
-                  <td>{user.name}</td>
-                  <td>{user.singlesRating}</td>
-                  <td>{user.forwardRating}</td>
-                  <td>{user.defensiveRating}</td>
+                  <td className="py-1 align-top">{user.name}</td>
+                  <td className="py-1 align-top">
+                    <div className="flex flex-col">
+                      {getDisplayRank(user, 'singles')}
+                    </div>
+                  </td>
+                  <td className="py-1 align-top">
+                    <div className="flex flex-col">
+                      {getDisplayRank(user, 'forward')}
+                    </div>
+                  </td>
+                  <td className="py-1 align-top">
+                    {getDisplayRank(user, 'defensive')}
+                  </td>
                 </tr>
               )
             })}

@@ -9,6 +9,16 @@ export type MatchWithUsers = Match & {
   loserDefensive: User | null
 }
 
+export type UserWithMatches = User & {
+  wonSingles: Match[]
+  lostSingles: Match[]
+
+  wonDoublesForward: Match[]
+  wonDoublesDefensive: Match[]
+  lostDoublesForward: Match[]
+  lostDoublesDefensive: Match[]
+}
+
 export type MatchOutcome = SinglesMatchOutcome | DoublesMatchOutcome
 
 export type SinglesMatchOutcome = {

@@ -30,6 +30,30 @@ export async function getUsers() {
   }
 }
 
+export async function getUsersWithMatches() {
+  try {
+    const users = await prisma.user.findMany({
+      orderBy: {
+        name: 'asc',
+      },
+      include: {
+        wonSingles: true,
+        lostSingles: true,
+
+        wonDoublesForward: true,
+        wonDoublesDefensive: true,
+        lostDoublesForward: true,
+        lostDoublesDefensive: true,
+      },
+    })
+
+    return users
+  } catch (error) {
+    console.error('Error fetching users:', error)
+    throw new Error('Failed to fetch users')
+  }
+}
+
 // post
 export async function createUser({ name }: { name: string }) {
   try {

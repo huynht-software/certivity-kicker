@@ -1,13 +1,13 @@
 import UserForm from '@/components/UserForm'
 import UserList from '@/components/UserList'
-import { getUsers } from '../actions'
+import { getUsersWithMatches } from '../actions'
 
 export const dynamic = 'force-dynamic'
 
 type Props = {}
 
 async function Users(props: Props) {
-  const allUsers = await getUsers()
+  const allUsers = await getUsersWithMatches()
 
   const password = process.env.USER_CREATION_PASSWORD!
 
@@ -15,7 +15,7 @@ async function Users(props: Props) {
     <>
       <div className="flex flex-col gap-4">
         <UserForm password={password} />
-        <UserList allUsers={allUsers} />
+        <UserList usersWithMatches={allUsers} />
       </div>
     </>
   )
