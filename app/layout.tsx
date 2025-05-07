@@ -1,6 +1,8 @@
+import LoadingDiv from '@/components/LoadingDiv'
 import Navbar from '@/components/Navbar'
 import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -18,9 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
-        <div className="w-screen px-4 my-4 pt-[60px] overscroll-y-auto">
-          {children}
-        </div>
+        <Suspense fallback={<LoadingDiv />}>
+          <div className="w-screen px-4 my-4 pt-[60px] overscroll-y-auto">
+            {children}
+          </div>
+        </Suspense>
         <Toaster />
       </body>
     </html>
