@@ -33,7 +33,7 @@ function UserForm(props: Props) {
 
       setTimeout(() => {
         router.refresh()
-      }, 50)
+      }, 100)
     } catch (error) {
       console.error('Error creating user:', error)
     } finally {

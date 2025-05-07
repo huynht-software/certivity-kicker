@@ -44,7 +44,7 @@ function SinglesMatchForm(props: Props) {
 
       setTimeout(() => {
         router.refresh()
-      }, 50)
+      }, 100)
     } catch (e) {
       console.error(e)
     } finally {

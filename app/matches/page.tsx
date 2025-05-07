@@ -3,6 +3,8 @@ import { getMatchesWithUsers } from '../actions'
 
 type Props = {}
 
+export const dynamic = 'force-dynamic'
+
 async function Matches(props: Props) {
   const allMatches = await getMatchesWithUsers()
 

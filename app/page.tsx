@@ -2,6 +2,8 @@ import MatchForm from '@/components/MatchForm'
 import MatchList from '@/components/MatchList'
 import { getMatchesWithUsers, getUsers } from './actions'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   const allUsers = await getUsers()
   const recentMatches = await getMatchesWithUsers({ limit: 10 })

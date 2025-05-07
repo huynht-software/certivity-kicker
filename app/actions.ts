@@ -2,7 +2,7 @@
 import prisma from '@/lib/prisma'
 import { RatingUtils } from '@/lib/ratingUtils'
 import { DoublesMatchOutcome, SinglesMatchOutcome } from '@/lib/types'
-import { revalidatePath } from 'next/cache'
+
 import { Match } from './generated/prisma'
 
 // USERS
@@ -30,8 +30,6 @@ export async function createUser({ name }: { name: string }) {
         name,
       },
     })
-
-    revalidatePath('/')
 
     return user
   } catch (error: any) {
@@ -125,8 +123,6 @@ export async function postSinglesMatch(matchOutcome: SinglesMatchOutcome) {
       data: { singlesRating: { increment: -ratingChange } },
     })
 
-    revalidatePath('/')
-
     return match
   } catch (error: any) {
     console.error(error)
@@ -175,8 +171,6 @@ export async function postDoublesMatch(matchOutcome: DoublesMatchOutcome) {
       data: { defensiveRating: { increment: -ratingChange } },
     })
 
-    revalidatePath('/')
-
     return match
   } catch (error: any) {
     throw new Error('Failed to create singles match')
@@ -204,8 +198,6 @@ export async function deleteSinglesMatch(input: { match: Match }) {
       where: { id: match.loserId! },
       data: { singlesRating: { increment: ratingChange } },
     })
-
-    revalidatePath('/')
   } catch (error: any) {
     console.error(error)
     throw new Error('Failed to delete singles match')
@@ -243,8 +235,6 @@ export async function deleteDoublesMatch(input: { match: Match }) {
       where: { id: match.loserDefensiveId! },
       data: { defensiveRating: { increment: ratingChange } },
     })
-
-    revalidatePath('/')
   } catch (error: any) {
     console.error(error)
     throw new Error('Failed to delete doubles match')
