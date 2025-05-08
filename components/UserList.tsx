@@ -98,9 +98,9 @@ function UserList(props: Props) {
       <>
         <div className="flex flex-col">
           <div>{rank}</div>
-          <div className="text-xs -mt-2 text-gray-600">
-            <span className="text-green-500">{wins}</span>-
-            <span className="text-red-500">{losses}</span>
+          <div className="text-xs -mt-1 text-gray-600">
+            <span className="text-green-400">{wins}</span>-
+            <span className="text-red-400">{losses}</span>
           </div>
         </div>
       </>
