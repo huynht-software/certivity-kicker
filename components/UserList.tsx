@@ -53,27 +53,36 @@ function UserList(props: Props) {
     type: 'singles' | 'forward' | 'defensive'
   ) {
     const gameCount = UserUtil.getGameCount(user)
-    const { rank, gamesPlayed } = (() => {
-      const unranked = { rank: 'unranked', gamesPlayed: 0 }
+    const { rank, wins, losses } = (() => {
+      const unranked = { rank: 'unranked', wins: 0, losses: 0 }
 
       switch (type) {
         case 'singles':
           if (gameCount.singles === 0) {
             return unranked
           }
-          return { rank: user.singlesRating, gamesPlayed: gameCount.singles }
+          return {
+            rank: user.singlesRating,
+            wins: user.wonSingles.length,
+            losses: user.lostSingles.length,
+          }
         case 'forward':
           if (gameCount.forward === 0) {
             return unranked
           }
-          return { rank: user.forwardRating, gamesPlayed: gameCount.forward }
+          return {
+            rank: user.forwardRating,
+            wins: user.wonDoublesForward.length,
+            losses: user.lostDoublesForward.length,
+          }
         case 'defensive':
           if (gameCount.defensive === 0) {
             return unranked
           }
           return {
             rank: user.defensiveRating,
-            gamesPlayed: gameCount.defensive,
+            wins: user.wonDoublesDefensive.length,
+            losses: user.lostDoublesDefensive.length,
           }
         default:
           Util.exhaustiveGuard(type)
@@ -90,7 +99,7 @@ function UserList(props: Props) {
         <div className="flex flex-col">
           <div>{rank}</div>
           <div className="text-sm -mt-1 text-gray-600">
-            {gamesPlayed} game{gamesPlayed > 1 ? 's' : ''}
+            <span>{wins}</span> - <span>{losses}</span>
           </div>
         </div>
       </>
