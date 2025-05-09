@@ -136,7 +136,7 @@ export async function postSinglesMatch(matchOutcome: SinglesMatchOutcome) {
   try {
     const ratingChange =
       RatingUtils.getSinglesRatingChange(matchOutcome) *
-      (2 * (matchOutcome.loserCrawled ? 1 : 0))
+      (matchOutcome.loserCrawled ? 2 : 1)
 
     const match = await prisma.match.create({
       data: {

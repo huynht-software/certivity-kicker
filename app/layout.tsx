@@ -21,8 +21,8 @@ export default function RootLayout({
       <body>
         <Navbar />
         <Suspense fallback={<LoadingDiv />}>
-          <div className="w-screen px-4 my-4 pt-[60px] overscroll-y-auto">
-            {children}
+          <div className="w-screen flex justify-center my-4 pt-[60px] overscroll-y-auto">
+            <div className="w-full px-4 lg:w-2/3">{children}</div>
           </div>
         </Suspense>
         <Toaster />

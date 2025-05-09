@@ -91,7 +91,7 @@ function UserList(props: Props) {
     })()
 
     if (rank === 'unranked') {
-      return <div>Unranked</div>
+      return <div>N/A</div>
     }
 
     return (
