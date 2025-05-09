@@ -170,7 +170,7 @@ export async function postDoublesMatch(matchOutcome: DoublesMatchOutcome) {
   try {
     const ratingChange =
       RatingUtils.getDoublesRatingChange(matchOutcome) *
-      (2 * (matchOutcome.loserCrawled ? 1 : 0))
+      (matchOutcome.loserCrawled ? 2 : 1)
 
     const match = await prisma.match.create({
       data: {
