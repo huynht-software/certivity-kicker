@@ -84,7 +84,7 @@ function SinglesMatchForm(props: Props) {
             />
           </div>
         </div>
-        <div className="flex items-center gap-8 justify-between lg:justify-start pr-4">
+        <div className="flex items-center gap-8 justify-between lg:justify-start pr-2">
           <TextButton
             buttonText="Submit"
             onClick={() => submitMatchForm()}
