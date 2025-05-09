@@ -2,9 +2,10 @@
 
 import { MatchWithUsers } from '@/lib/types'
 import { Util } from '@/lib/utils'
-import { ArrowDownIcon, ArrowUpIcon } from 'lucide-react'
+import { ArrowDownIcon, ArrowUpIcon, FlameIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useMemo, useState } from 'react'
+import UserList from './UserList'
 
 type Props = {
   allMatches: MatchWithUsers[]
@@ -36,11 +37,11 @@ function MatchList(props: Props) {
 
   return (
     <>
-      <div className="flex flex-col gap-2 border p-4 rounded-md">
+      <div className="flex flex-col gap-2 border rounded-md pt-2">
         <table className="border-collapse">
           <thead className="font-bold border-b-2">
             <tr>
-              {UserListColumns.map((columnName) => {
+              {UserListColumns.map((columnName, i) => {
                 if (columnName === 'Date') {
                   return (
                     <td
@@ -66,9 +67,9 @@ function MatchList(props: Props) {
                 return (
                   <td key={columnName} className="pb-2">
                     <div
-                      className={`w-full flex ${
-                        columnName === '±' ? 'pl-1' : ''
-                      }`}
+                      className={`w-full flex ${i === 0 ? 'pl-2' : ''} ${
+                        i === UserList.length ? 'pr-2' : ''
+                      }  ${columnName === '±' ? 'pl-1' : ''}`}
                     >
                       {columnName}
                     </div>
@@ -82,14 +83,16 @@ function MatchList(props: Props) {
               return (
                 <tr
                   key={match.id}
-                  className={`cursor-pointer ${i !== 0 ? 'border-t' : ''}`}
+                  className={`cursor-pointer ${i !== 0 ? 'border-t' : ''} ${
+                    match.loserCrawled ? 'bg-red-200' : ''
+                  }`}
                   onClick={() => {
                     router.push(`/matches/${match.id}`)
                   }}
                 >
                   {match.isDoubles && (
                     <>
-                      <td>
+                      <td className="pl-2">
                         <div className="flex flex-col text-green-500">
                           <div>{match.winnerDefensive?.name}</div>
                           <div>{match.winnerForward?.name}</div>
@@ -106,7 +109,7 @@ function MatchList(props: Props) {
                   )}
                   {!match.isDoubles && (
                     <>
-                      <td className="text-green-500">
+                      <td className="text-green-500 pl-2">
                         <div className="py-2">{match.winner!.name}</div>
                       </td>
                       <td className="text-red-500">
@@ -114,9 +117,20 @@ function MatchList(props: Props) {
                       </td>
                     </>
                   )}
-                  <td>{match.ratingChange}</td>
                   <td>
-                    <div className="flex flex-col items-end lg:items-start">
+                    <div className="flex items-center gap-0.5">
+                      <div
+                        className={`${match.loserCrawled ? 'font-bold' : ''}`}
+                      >
+                        {match.ratingChange}
+                      </div>
+                      {match.loserCrawled && (
+                        <FlameIcon className="size-5 text-red-500" />
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex flex-col items-end lg:items-start pr-2">
                       {Util.formatDate(match.createdAt)}
                       <div className="text-xs pb-[2px]">
                         {Util.formatTime(match.createdAt)}

@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import { DropdownInput } from './DropdownInput'
 import TextButton from './TextButton'
+import { Switch } from './ui/switch'
 
 type Props = {
   allUsers: User[]
@@ -23,6 +24,8 @@ function DoublesMatchForm(props: Props) {
 
   const [loserD, setLoserD] = useState<User>()
   const [loserF, setLoserF] = useState<User>()
+
+  const [loserCrawled, setLoserCrawled] = useState(false)
 
   const [loading, setLoading] = useState(false)
 
@@ -61,6 +64,7 @@ function DoublesMatchForm(props: Props) {
           forward: loserF!,
           defensive: loserD!,
         },
+        loserCrawled: loserCrawled,
       })
 
       setWinnerD(undefined)
@@ -68,6 +72,8 @@ function DoublesMatchForm(props: Props) {
 
       setLoserD(undefined)
       setLoserF(undefined)
+
+      setLoserCrawled(false)
 
       setTimeout(() => {
         router.refresh()
@@ -127,11 +133,21 @@ function DoublesMatchForm(props: Props) {
             />
           </div>
         </div>
-        <TextButton
-          buttonText="Submit"
-          onClick={() => submitMatchForm()}
-          isLoading={loading}
-        />
+        <div className="flex items-center gap-8">
+          <TextButton
+            buttonText="Submit"
+            onClick={() => submitMatchForm()}
+            isLoading={loading}
+          />
+
+          <div className="flex items-center gap-2">
+            <Switch
+              checked={loserCrawled}
+              onCheckedChange={(e) => setLoserCrawled(e)}
+            />
+            Crawl
+          </div>
+        </div>
       </div>
     </>
   )

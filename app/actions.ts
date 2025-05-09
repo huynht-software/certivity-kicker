@@ -134,7 +134,9 @@ export async function getMatchWithUsers(input: { id: string }) {
 // post single match
 export async function postSinglesMatch(matchOutcome: SinglesMatchOutcome) {
   try {
-    const ratingChange = RatingUtils.getSinglesRatingChange(matchOutcome)
+    const ratingChange =
+      RatingUtils.getSinglesRatingChange(matchOutcome) *
+      (2 * (matchOutcome.loserCrawled ? 1 : 0))
 
     const match = await prisma.match.create({
       data: {
@@ -142,6 +144,7 @@ export async function postSinglesMatch(matchOutcome: SinglesMatchOutcome) {
         winnerId: matchOutcome.winner.id,
         loserId: matchOutcome.loser.id,
         ratingChange: ratingChange,
+        loserCrawled: matchOutcome.loserCrawled,
       },
     })
 
@@ -165,7 +168,9 @@ export async function postSinglesMatch(matchOutcome: SinglesMatchOutcome) {
 // post doubles match
 export async function postDoublesMatch(matchOutcome: DoublesMatchOutcome) {
   try {
-    const ratingChange = RatingUtils.getDoublesRatingChange(matchOutcome)
+    const ratingChange =
+      RatingUtils.getDoublesRatingChange(matchOutcome) *
+      (2 * (matchOutcome.loserCrawled ? 1 : 0))
 
     const match = await prisma.match.create({
       data: {
@@ -180,6 +185,7 @@ export async function postDoublesMatch(matchOutcome: DoublesMatchOutcome) {
         loserDefensiveId: matchOutcome.loser.defensive.id,
 
         ratingChange: ratingChange,
+        loserCrawled: matchOutcome.loserCrawled,
       },
     })
 

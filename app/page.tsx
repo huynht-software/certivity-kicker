@@ -10,7 +10,7 @@ export default async function Home() {
 
   return (
     <div className="flex justify-center gap-4 w-full">
-      <div className="w-5/6 lg:w-2/3 flex flex-col">
+      <div className="flex flex-col w-full">
         <MatchForm allUsers={allUsers} />
 
         <div className="mt-12 flex flex-col gap-2">

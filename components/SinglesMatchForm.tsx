@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import { DropdownInput } from './DropdownInput'
 import TextButton from './TextButton'
+import { Switch } from './ui/switch'
 
 type Props = {
   allUsers: User[]
@@ -17,6 +18,7 @@ function SinglesMatchForm(props: Props) {
 
   const [winner, setWinner] = useState<User>()
   const [loser, setLoser] = useState<User>()
+  const [loserCrawled, setLoserCrawled] = useState(false)
   const [loading, setLoading] = useState(false)
 
   async function submitMatchForm() {
@@ -37,10 +39,12 @@ function SinglesMatchForm(props: Props) {
         type: 'singles',
         winner: winner,
         loser: loser,
+        loserCrawled: loserCrawled,
       })
 
       setWinner(undefined)
       setLoser(undefined)
+      setLoserCrawled(false)
 
       setTimeout(() => {
         router.refresh()
@@ -80,11 +84,21 @@ function SinglesMatchForm(props: Props) {
             />
           </div>
         </div>
-        <TextButton
-          buttonText="Submit"
-          onClick={() => submitMatchForm()}
-          isLoading={loading}
-        />
+        <div className="flex gap-8 items-center">
+          <TextButton
+            buttonText="Submit"
+            onClick={() => submitMatchForm()}
+            isLoading={loading}
+          />
+
+          <div className="flex items-center gap-2">
+            <Switch
+              checked={loserCrawled}
+              onCheckedChange={(checked) => setLoserCrawled(checked)}
+            />
+            Crawl
+          </div>
+        </div>
       </div>
     </>
   )

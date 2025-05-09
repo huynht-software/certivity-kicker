@@ -25,6 +25,7 @@ export type SinglesMatchOutcome = {
   type: 'singles'
   winner: User
   loser: User
+  loserCrawled: boolean
 }
 
 export type DoublesMatchOutcome = {
@@ -37,4 +38,5 @@ export type DoublesMatchOutcome = {
     forward: User
     defensive: User
   }
+  loserCrawled: boolean
 }

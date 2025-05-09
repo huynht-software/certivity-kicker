@@ -29,6 +29,7 @@ model Match {
   isDoubles    Boolean
   createdAt    DateTime @default(now())
   ratingChange Int
+  loserCrawled Boolean?
 
   // Singles Match
   winnerId String? @db.ObjectId
