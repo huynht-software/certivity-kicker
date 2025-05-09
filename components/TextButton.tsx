@@ -108,7 +108,7 @@ export default function TextButton(props: Props) {
               >
                 Cancel
               </AlertDialogCancel>
-              <AlertDialogAction>
+              <AlertDialogAction onClick={props.onClick}>
                 {props.confirmationModal.confirmationButtonText ?? 'Continue'}
               </AlertDialogAction>
             </AlertDialogFooter>
