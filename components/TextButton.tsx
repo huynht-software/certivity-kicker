@@ -1,5 +1,23 @@
+'use client'
+
 import LoadingDiv from '@/components/LoadingDiv'
-import { ReactNode } from 'react'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
+import { ReactNode, useState } from 'react'
+
+export type TextButtonConfirmationModal = {
+  description: string
+  title?: string
+  confirmationButtonText?: string
+}
 
 type Props = {
   buttonText: string
@@ -10,6 +28,7 @@ type Props = {
   disabled?: boolean
   icon?: ReactNode
   isLoading?: boolean
+  confirmationModal?: TextButtonConfirmationModal
   additionalOptions?: {
     icon?: ReactNode
     text: string
@@ -24,6 +43,8 @@ export default function TextButton(props: Props) {
     tooltip = 'This button does not have a tooltip yet. Contact the devs if you want to have a better explanation of this button added.',
     style = 'default',
   } = props
+
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
 
   const styleMapping = new Map<ButtonStyle, string>([
     ['default', 'default-button'],
@@ -45,7 +66,9 @@ export default function TextButton(props: Props) {
             <div
               onClick={(e) => {
                 e.preventDefault()
-                if (!props.disabled) {
+                if (props.confirmationModal) {
+                  setShowConfirmationModal(true)
+                } else if (!props.disabled) {
                   props.onClick()
                 }
               }}
@@ -67,6 +90,30 @@ export default function TextButton(props: Props) {
         <div className={`${buttonStyle} flex items-center`}>
           <LoadingDiv size={5} />
         </div>
+      )}
+      {props.confirmationModal && (
+        <AlertDialog open={showConfirmationModal}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>
+                {props.confirmationModal.title ?? 'Are you absolutely sure?'}
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                {props.confirmationModal.description}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel
+                onClick={() => setShowConfirmationModal(false)}
+              >
+                Cancel
+              </AlertDialogCancel>
+              <AlertDialogAction>
+                {props.confirmationModal.confirmationButtonText ?? 'Continue'}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       )}
     </>
   )

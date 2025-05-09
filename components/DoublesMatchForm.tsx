@@ -138,6 +138,15 @@ function DoublesMatchForm(props: Props) {
             buttonText="Submit"
             onClick={() => submitMatchForm()}
             isLoading={loading}
+            confirmationModal={
+              loserCrawled
+                ? {
+                    description:
+                      'This match will count double and dignity will be lost.',
+                    confirmationButtonText: 'Make em crawl!',
+                  }
+                : undefined
+            }
           />
 
           <div className="flex items-center gap-2">

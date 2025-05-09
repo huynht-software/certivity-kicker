@@ -5,7 +5,7 @@ function HowTo(props: Props) {
     <>
       <div className="w-full flex justify-center">
         <div className="h-2/3 flex flex-col px-8 border-2 rounded-md pb-8">
-          <div>
+          <div className="text-box">
             <h2>What is this?</h2>
             <div>
               This is an application to keep track of player's rankings for
@@ -30,7 +30,7 @@ function HowTo(props: Props) {
             </div>
           </div>
 
-          <div>
+          <div className="text-box">
             <h2>How does it work?</h2>
             <h3>Creating a match</h3>
             <div>

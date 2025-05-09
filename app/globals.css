@@ -5,11 +5,11 @@ body {
   @apply text-gray-800;
 }
 
-h2 {
+.text-box > h2 {
   @apply text-2xl font-bold mb-5 mt-12;
 }
 
-h3 {
+.text-box > h3 {
   @apply font-bold mb-1 mt-4;
 }
 
