@@ -2,7 +2,7 @@
 
 import { MatchWithUsers } from '@/lib/types'
 import { Util } from '@/lib/utils'
-import { ArrowDownIcon, ArrowUpIcon, FlameIcon } from 'lucide-react'
+import { ArrowDownIcon, ArrowUpIcon, FlameIcon, ZapIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useMemo, useState } from 'react'
 import UserList from './UserList'
@@ -85,7 +85,7 @@ function MatchList(props: Props) {
                   key={match.id}
                   className={`cursor-pointer ${i !== 0 ? 'border-t' : ''} ${
                     match.loserCrawled ? 'bg-red-200' : ''
-                  }`}
+                  } ${match.goldenGoal ? 'bg-amber-100' : ''}`}
                   onClick={() => {
                     router.push(`/matches/${match.id}`)
                   }}
@@ -126,6 +126,9 @@ function MatchList(props: Props) {
                       </div>
                       {match.loserCrawled && (
                         <FlameIcon className="size-5 text-red-500" />
+                      )}
+                      {match.goldenGoal && (
+                        <ZapIcon className="size-5 text-yellow-500" />
                       )}
                     </div>
                   </td>

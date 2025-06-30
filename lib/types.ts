@@ -26,6 +26,7 @@ export type SinglesMatchOutcome = {
   winner: User
   loser: User
   loserCrawled: boolean
+  goldenGoal: boolean
 }
 
 export type DoublesMatchOutcome = {
@@ -39,4 +40,5 @@ export type DoublesMatchOutcome = {
     defensive: User
   }
   loserCrawled: boolean
+  goldenGoal: boolean
 }

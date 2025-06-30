@@ -26,6 +26,7 @@ function DoublesMatchForm(props: Props) {
   const [loserF, setLoserF] = useState<User>()
 
   const [loserCrawled, setLoserCrawled] = useState(false)
+  const [goldenGoal, setGoldenGoal] = useState(false)
 
   const [loading, setLoading] = useState(false)
 
@@ -65,6 +66,7 @@ function DoublesMatchForm(props: Props) {
           defensive: loserD!,
         },
         loserCrawled: loserCrawled,
+        goldenGoal: goldenGoal,
       })
 
       setWinnerD(undefined)
@@ -133,7 +135,7 @@ function DoublesMatchForm(props: Props) {
             />
           </div>
         </div>
-        <div className="flex items-center gap-8 justify-between lg:justify-start pr-2">
+        <div className="flex items-center gap-8 justify-between lg:justify-start lg:gap-32 pr-2">
           <TextButton
             buttonText="Submit"
             onClick={() => submitMatchForm()}
@@ -149,12 +151,22 @@ function DoublesMatchForm(props: Props) {
             }
           />
 
-          <div className="flex items-center gap-2">
-            <Switch
-              checked={loserCrawled}
-              onCheckedChange={(e) => setLoserCrawled(e)}
-            />
-            Crawl
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-8">
+            <div className="flex items-center gap-2">
+              <Switch
+                checked={loserCrawled}
+                onCheckedChange={(e) => setLoserCrawled(e)}
+              />
+              Crawl
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Switch
+                checked={goldenGoal}
+                onCheckedChange={(e) => setGoldenGoal(e)}
+              />
+              Golden Goal
+            </div>
           </div>
         </div>
       </div>

@@ -18,7 +18,10 @@ function SinglesMatchForm(props: Props) {
 
   const [winner, setWinner] = useState<User>()
   const [loser, setLoser] = useState<User>()
+
   const [loserCrawled, setLoserCrawled] = useState(false)
+  const [goldenGoal, setGoldenGoal] = useState(false)
+
   const [loading, setLoading] = useState(false)
 
   async function submitMatchForm() {
@@ -40,6 +43,7 @@ function SinglesMatchForm(props: Props) {
         winner: winner,
         loser: loser,
         loserCrawled: loserCrawled,
+        goldenGoal: goldenGoal,
       })
 
       setWinner(undefined)
@@ -100,12 +104,22 @@ function SinglesMatchForm(props: Props) {
             }
           />
 
-          <div className="flex items-center gap-2">
-            <Switch
-              checked={loserCrawled}
-              onCheckedChange={(checked) => setLoserCrawled(checked)}
-            />
-            Crawl
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-8">
+            <div className="flex items-center gap-2">
+              <Switch
+                checked={loserCrawled}
+                onCheckedChange={(e) => setLoserCrawled(e)}
+              />
+              Crawl
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Switch
+                checked={goldenGoal}
+                onCheckedChange={(e) => setGoldenGoal(e)}
+              />
+              Golden Goal
+            </div>
           </div>
         </div>
       </div>

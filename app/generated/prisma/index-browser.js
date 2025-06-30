@@ -126,6 +126,8 @@ exports.Prisma.MatchScalarFieldEnum = {
   isDoubles: 'isDoubles',
   createdAt: 'createdAt',
   ratingChange: 'ratingChange',
+  loserCrawled: 'loserCrawled',
+  goldenGoal: 'goldenGoal',
   winnerId: 'winnerId',
   loserId: 'loserId',
   winnerForwardId: 'winnerForwardId',

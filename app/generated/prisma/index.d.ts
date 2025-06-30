@@ -2201,6 +2201,8 @@ export namespace Prisma {
     isDoubles: boolean | null
     createdAt: Date | null
     ratingChange: number | null
+    loserCrawled: boolean | null
+    goldenGoal: boolean | null
     winnerId: string | null
     loserId: string | null
     winnerForwardId: string | null
@@ -2214,6 +2216,8 @@ export namespace Prisma {
     isDoubles: boolean | null
     createdAt: Date | null
     ratingChange: number | null
+    loserCrawled: boolean | null
+    goldenGoal: boolean | null
     winnerId: string | null
     loserId: string | null
     winnerForwardId: string | null
@@ -2227,6 +2231,8 @@ export namespace Prisma {
     isDoubles: number
     createdAt: number
     ratingChange: number
+    loserCrawled: number
+    goldenGoal: number
     winnerId: number
     loserId: number
     winnerForwardId: number
@@ -2250,6 +2256,8 @@ export namespace Prisma {
     isDoubles?: true
     createdAt?: true
     ratingChange?: true
+    loserCrawled?: true
+    goldenGoal?: true
     winnerId?: true
     loserId?: true
     winnerForwardId?: true
@@ -2263,6 +2271,8 @@ export namespace Prisma {
     isDoubles?: true
     createdAt?: true
     ratingChange?: true
+    loserCrawled?: true
+    goldenGoal?: true
     winnerId?: true
     loserId?: true
     winnerForwardId?: true
@@ -2276,6 +2286,8 @@ export namespace Prisma {
     isDoubles?: true
     createdAt?: true
     ratingChange?: true
+    loserCrawled?: true
+    goldenGoal?: true
     winnerId?: true
     loserId?: true
     winnerForwardId?: true
@@ -2376,6 +2388,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt: Date
     ratingChange: number
+    loserCrawled: boolean | null
+    goldenGoal: boolean | null
     winnerId: string | null
     loserId: string | null
     winnerForwardId: string | null
@@ -2408,6 +2422,8 @@ export namespace Prisma {
     isDoubles?: boolean
     createdAt?: boolean
     ratingChange?: boolean
+    loserCrawled?: boolean
+    goldenGoal?: boolean
     winnerId?: boolean
     loserId?: boolean
     winnerForwardId?: boolean
@@ -2429,6 +2445,8 @@ export namespace Prisma {
     isDoubles?: boolean
     createdAt?: boolean
     ratingChange?: boolean
+    loserCrawled?: boolean
+    goldenGoal?: boolean
     winnerId?: boolean
     loserId?: boolean
     winnerForwardId?: boolean
@@ -2437,7 +2455,7 @@ export namespace Prisma {
     loserDefensiveId?: boolean
   }
 
-  export type MatchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "isDoubles" | "createdAt" | "ratingChange" | "winnerId" | "loserId" | "winnerForwardId" | "winnerDefensiveId" | "loserForwardId" | "loserDefensiveId", ExtArgs["result"]["match"]>
+  export type MatchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "isDoubles" | "createdAt" | "ratingChange" | "loserCrawled" | "goldenGoal" | "winnerId" | "loserId" | "winnerForwardId" | "winnerDefensiveId" | "loserForwardId" | "loserDefensiveId", ExtArgs["result"]["match"]>
   export type MatchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     winner?: boolean | Match$winnerArgs<ExtArgs>
     loser?: boolean | Match$loserArgs<ExtArgs>
@@ -2462,6 +2480,8 @@ export namespace Prisma {
       isDoubles: boolean
       createdAt: Date
       ratingChange: number
+      loserCrawled: boolean | null
+      goldenGoal: boolean | null
       winnerId: string | null
       loserId: string | null
       winnerForwardId: string | null
@@ -2870,6 +2890,8 @@ export namespace Prisma {
     readonly isDoubles: FieldRef<"Match", 'Boolean'>
     readonly createdAt: FieldRef<"Match", 'DateTime'>
     readonly ratingChange: FieldRef<"Match", 'Int'>
+    readonly loserCrawled: FieldRef<"Match", 'Boolean'>
+    readonly goldenGoal: FieldRef<"Match", 'Boolean'>
     readonly winnerId: FieldRef<"Match", 'String'>
     readonly loserId: FieldRef<"Match", 'String'>
     readonly winnerForwardId: FieldRef<"Match", 'String'>
@@ -3398,6 +3420,8 @@ export namespace Prisma {
     isDoubles: 'isDoubles',
     createdAt: 'createdAt',
     ratingChange: 'ratingChange',
+    loserCrawled: 'loserCrawled',
+    goldenGoal: 'goldenGoal',
     winnerId: 'winnerId',
     loserId: 'loserId',
     winnerForwardId: 'winnerForwardId',
@@ -3576,6 +3600,8 @@ export namespace Prisma {
     isDoubles?: BoolFilter<"Match"> | boolean
     createdAt?: DateTimeFilter<"Match"> | Date | string
     ratingChange?: IntFilter<"Match"> | number
+    loserCrawled?: BoolNullableFilter<"Match"> | boolean | null
+    goldenGoal?: BoolNullableFilter<"Match"> | boolean | null
     winnerId?: StringNullableFilter<"Match"> | string | null
     loserId?: StringNullableFilter<"Match"> | string | null
     winnerForwardId?: StringNullableFilter<"Match"> | string | null
@@ -3595,6 +3621,8 @@ export namespace Prisma {
     isDoubles?: SortOrder
     createdAt?: SortOrder
     ratingChange?: SortOrder
+    loserCrawled?: SortOrder
+    goldenGoal?: SortOrder
     winnerId?: SortOrder
     loserId?: SortOrder
     winnerForwardId?: SortOrder
@@ -3617,6 +3645,8 @@ export namespace Prisma {
     isDoubles?: BoolFilter<"Match"> | boolean
     createdAt?: DateTimeFilter<"Match"> | Date | string
     ratingChange?: IntFilter<"Match"> | number
+    loserCrawled?: BoolNullableFilter<"Match"> | boolean | null
+    goldenGoal?: BoolNullableFilter<"Match"> | boolean | null
     winnerId?: StringNullableFilter<"Match"> | string | null
     loserId?: StringNullableFilter<"Match"> | string | null
     winnerForwardId?: StringNullableFilter<"Match"> | string | null
@@ -3636,6 +3666,8 @@ export namespace Prisma {
     isDoubles?: SortOrder
     createdAt?: SortOrder
     ratingChange?: SortOrder
+    loserCrawled?: SortOrder
+    goldenGoal?: SortOrder
     winnerId?: SortOrder
     loserId?: SortOrder
     winnerForwardId?: SortOrder
@@ -3657,6 +3689,8 @@ export namespace Prisma {
     isDoubles?: BoolWithAggregatesFilter<"Match"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Match"> | Date | string
     ratingChange?: IntWithAggregatesFilter<"Match"> | number
+    loserCrawled?: BoolNullableWithAggregatesFilter<"Match"> | boolean | null
+    goldenGoal?: BoolNullableWithAggregatesFilter<"Match"> | boolean | null
     winnerId?: StringNullableWithAggregatesFilter<"Match"> | string | null
     loserId?: StringNullableWithAggregatesFilter<"Match"> | string | null
     winnerForwardId?: StringNullableWithAggregatesFilter<"Match"> | string | null
@@ -3746,6 +3780,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
@@ -3759,6 +3795,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -3771,6 +3809,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
@@ -3783,6 +3823,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3796,6 +3838,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -3808,12 +3852,16 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type MatchUncheckedUpdateManyInput = {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3944,6 +3992,12 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+    isSet?: boolean
+  }
+
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -3970,6 +4024,8 @@ export namespace Prisma {
     isDoubles?: SortOrder
     createdAt?: SortOrder
     ratingChange?: SortOrder
+    loserCrawled?: SortOrder
+    goldenGoal?: SortOrder
     winnerId?: SortOrder
     loserId?: SortOrder
     winnerForwardId?: SortOrder
@@ -3987,6 +4043,8 @@ export namespace Prisma {
     isDoubles?: SortOrder
     createdAt?: SortOrder
     ratingChange?: SortOrder
+    loserCrawled?: SortOrder
+    goldenGoal?: SortOrder
     winnerId?: SortOrder
     loserId?: SortOrder
     winnerForwardId?: SortOrder
@@ -4000,6 +4058,8 @@ export namespace Prisma {
     isDoubles?: SortOrder
     createdAt?: SortOrder
     ratingChange?: SortOrder
+    loserCrawled?: SortOrder
+    goldenGoal?: SortOrder
     winnerId?: SortOrder
     loserId?: SortOrder
     winnerForwardId?: SortOrder
@@ -4032,6 +4092,15 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -4361,6 +4430,11 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+    unset?: boolean
+  }
+
   export type UserUpdateOneWithoutWonSinglesNestedInput = {
     create?: XOR<UserCreateWithoutWonSinglesInput, UserUncheckedCreateWithoutWonSinglesInput>
     connectOrCreate?: UserCreateOrConnectWithoutWonSinglesInput
@@ -4511,6 +4585,12 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+    isSet?: boolean
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -4548,6 +4628,27 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -4566,23 +4667,13 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-    isSet?: boolean
-  }
-
   export type MatchCreateWithoutWinnerInput = {
     id?: string
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
     winnerDefensive?: UserCreateNestedOneWithoutWonDoublesDefensiveInput
@@ -4595,6 +4686,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     loserId?: string | null
     winnerForwardId?: string | null
     winnerDefensiveId?: string | null
@@ -4616,6 +4709,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
     winnerDefensive?: UserCreateNestedOneWithoutWonDoublesDefensiveInput
@@ -4628,6 +4723,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     winnerForwardId?: string | null
     winnerDefensiveId?: string | null
@@ -4649,6 +4746,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerDefensive?: UserCreateNestedOneWithoutWonDoublesDefensiveInput
@@ -4661,6 +4760,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     loserId?: string | null
     winnerDefensiveId?: string | null
@@ -4682,6 +4783,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
@@ -4694,6 +4797,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -4715,6 +4820,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
@@ -4727,6 +4834,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -4748,6 +4857,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winner?: UserCreateNestedOneWithoutWonSinglesInput
     loser?: UserCreateNestedOneWithoutLostSinglesInput
     winnerForward?: UserCreateNestedOneWithoutWonDoublesForwardInput
@@ -4760,6 +4871,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -4800,6 +4913,8 @@ export namespace Prisma {
     isDoubles?: BoolFilter<"Match"> | boolean
     createdAt?: DateTimeFilter<"Match"> | Date | string
     ratingChange?: IntFilter<"Match"> | number
+    loserCrawled?: BoolNullableFilter<"Match"> | boolean | null
+    goldenGoal?: BoolNullableFilter<"Match"> | boolean | null
     winnerId?: StringNullableFilter<"Match"> | string | null
     loserId?: StringNullableFilter<"Match"> | string | null
     winnerForwardId?: StringNullableFilter<"Match"> | string | null
@@ -5289,6 +5404,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     loserId?: string | null
     winnerForwardId?: string | null
     winnerDefensiveId?: string | null
@@ -5301,6 +5418,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     winnerForwardId?: string | null
     winnerDefensiveId?: string | null
@@ -5313,6 +5432,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     loserId?: string | null
     winnerDefensiveId?: string | null
@@ -5325,6 +5446,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -5337,6 +5460,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -5349,6 +5474,8 @@ export namespace Prisma {
     isDoubles: boolean
     createdAt?: Date | string
     ratingChange: number
+    loserCrawled?: boolean | null
+    goldenGoal?: boolean | null
     winnerId?: string | null
     loserId?: string | null
     winnerForwardId?: string | null
@@ -5360,6 +5487,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
     winnerDefensive?: UserUpdateOneWithoutWonDoublesDefensiveNestedInput
@@ -5371,6 +5500,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5382,6 +5513,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5393,6 +5526,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
     winnerDefensive?: UserUpdateOneWithoutWonDoublesDefensiveNestedInput
@@ -5404,6 +5539,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5415,6 +5552,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5426,6 +5565,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerDefensive?: UserUpdateOneWithoutWonDoublesDefensiveNestedInput
@@ -5437,6 +5578,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5448,6 +5591,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerDefensiveId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5459,6 +5604,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
@@ -5470,6 +5617,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5481,6 +5630,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5492,6 +5643,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
@@ -5503,6 +5656,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5514,6 +5669,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5525,6 +5682,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winner?: UserUpdateOneWithoutWonSinglesNestedInput
     loser?: UserUpdateOneWithoutLostSinglesNestedInput
     winnerForward?: UserUpdateOneWithoutWonDoublesForwardNestedInput
@@ -5536,6 +5695,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5547,6 +5708,8 @@ export namespace Prisma {
     isDoubles?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ratingChange?: IntFieldUpdateOperationsInput | number
+    loserCrawled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    goldenGoal?: NullableBoolFieldUpdateOperationsInput | boolean | null
     winnerId?: NullableStringFieldUpdateOperationsInput | string | null
     loserId?: NullableStringFieldUpdateOperationsInput | string | null
     winnerForwardId?: NullableStringFieldUpdateOperationsInput | string | null

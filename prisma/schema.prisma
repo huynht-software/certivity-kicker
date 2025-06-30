@@ -30,6 +30,7 @@ model Match {
   createdAt    DateTime @default(now())
   ratingChange Int
   loserCrawled Boolean?
+  goldenGoal   Boolean?
 
   // Singles Match
   winnerId String? @db.ObjectId
